@@ -6,7 +6,7 @@
 /*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/07/31 21:50:46 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:01:14 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,3 +46,4 @@ void	add_token(t_token_list **first, t_token_list *to_add)
 	temp->next = to_add;
 	to_add->prev = temp;
 }
+

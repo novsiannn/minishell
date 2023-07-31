@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/07/31 18:47:19 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/07/31 22:33:34 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define SINGLE_QUOTES 6 // '
 # define HEREDOCK 7 // <<
 # define APPEND 8 // >>
-# define EXPANSION 9 
+# define EXPANSION 9
 
 typedef struct s_token_list
 {
@@ -42,5 +42,7 @@ typedef struct s_token_list
 
 char			*read_input();
 int				get_type(char symbol);
-t_token_list	*lexer(char *input);
+void	lexer(char *input);//
+t_token_list	*create_token(int length, char *start, int type);
+void			add_token(t_token_list **first, t_token_list *to_add);
 #endif

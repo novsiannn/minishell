@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+         #
+#    By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/26 18:59:58 by nikitos           #+#    #+#              #
-#    Updated: 2023/07/26 22:04:56 by nikitos          ###   ########.fr        #
+#    Updated: 2023/07/31 18:43:30 by novsiann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFT = libft
 
-SRCS = src/main.c
+SRCS = src/main.c src/lexer.c src/read_input.c src/lexer_utils.c
 OBJS = ${SRCS:.c=.o}
 
 RM = rm -f
@@ -46,7 +46,7 @@ clean:
 		$(RM) $(OBJS)
 		$(RM) libft.a
 		@echo "\n"
-		@echo "$(YELLOW)Objects removed.!"
+		@echo "$(YELLOW)Objects removed!"
 		@echo "\n"
 
 fclean: clean

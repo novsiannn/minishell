@@ -1,28 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/07/31 17:18:55 by novsiann         ###   ########.fr       */
+/*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
+/*   Updated: 2023/07/31 18:44:20 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int main()
+t_token_list *lexer(char *input)
 {
-	char *str;
-	t_token_list	*tokens;
+	int i;
+	int	type;
+	t_token_list *list = NULL;
 
-	while(1)
-	{
-		str = read_input();
-		if (!str)
-			return (0);
-		tokens = lexer(str);
-	}
-	return (1);
+
+	i = 0;
+	type = get_type(input[i]);
+	// while(input[i])
+	// {
+		
+	// }
+	printf("%d", type);
+	return (list);
 }

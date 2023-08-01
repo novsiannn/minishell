@@ -6,20 +6,100 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/01 16:17:08 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 20:47:21 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+char *get_word(char *str, int start, int end)
+{
+	char 	*new_str;
+	int		i;
+
+	i = 0;
+	new_str = malloc(sizeof(char) * (end - start + 1));
+	if (!new_str)
+		return (NULL);
+	while (start < end)
+		new_str[i++] = str[start++];
+	new_str[i] = '\0';
+	return (new_str);
+}
+
+//Iliya eto PIZDA!!!!!!!
+void	list_value_split(t_token_list **list, int type)
+{
+	t_token_list	*tmp;
+	t_token_list	*splited_tokens;
+	int				start;
+	int				end;
+	char			*str;
+
+	tmp = *list;
+	start = 0;
+	end = 0;
+	splited_tokens = NULL;
+	while (tmp->tok[end] != '\0')
+	{
+		if(get_type(tmp->tok[end]) != type || tmp->tok[end + 1] == '\0')
+		{
+			if (tmp->tok[end + 1] == '\0')
+				end++;
+			str = get_word(tmp->tok, start, end);
+			if (!splited_tokens)
+				splited_tokens = create_token(end - start, str, 1);
+			else
+				ft_lstadd_back_minishell(&splited_tokens, create_token(end - start, str, 1));
+			free(str);
+			// printf("%s\n", str);
+			printf("[%s]\n", splited_tokens->tok);
+			type = get_type(tmp->tok[end]);
+			start = end;
+		}
+		end++;
+	}
+	// while (splited_tokens != NULL)
+	// {
+	// 	printf("[%s]\n", splited_tokens->tok);
+	// 	splited_tokens = splited_tokens->next;
+	// }
+}
+
+void	list_value_check(t_token_list **list)
+{
+	int 			i;
+	int 			type;
+	t_token_list	*temp;
+
+	temp = *list;
+	while(temp != NULL)
+	{
+		i = 0;
+		type = get_type(temp->tok[i]);
+		while(temp->tok[i] != '\0')
+		{
+			if (get_type(temp->tok[i]) != type)
+			{
+				list_value_split(&temp, type);
+				break ;
+			}
+			else
+				i++;
+		}
+		temp = temp->next;
+	}
+}
+
 t_token_list	*list_without_spaces(char *str, int start, int end)
 {
 	char *new_str;
 	t_token_list *list;
-	int tmp_start = start;
+	int tmp_start;
 	int	i;
 
 	i = 0;
+	tmp_start = start;
 	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
 	if (!new_str)
 		exit (0);
@@ -29,49 +109,15 @@ t_token_list	*list_without_spaces(char *str, int start, int end)
 	return (list);
 }
 
-// void	list_value_split(t_token_list **list)
-// {
-// 	int i = 0;
-
-// 	while(*list != NULL)
-// 	{
-// 		*list = (*list)->next;
-// 		printf("%s ",)
-// 		i++;
-// 	}
-// 	printf("%d", i);
-// }
-
-void	list_value_check(t_token_list **list)
-{
-	int i;
-	int type;
-
-	while((*list) != NULL)
-	{
-		i = 0;
-		type = get_type((*list)->tok[i]);
-		while((*list)->tok[i] != '\0')
-		{
-			if (get_type((*list)->tok[i]) != type)
-				list_value_split(list);
-			i++;
-		}
-		printf("\n next list\n\n");
-		*list = (*list)->next;
-	}
-}
-
 void	lexer(char *input)//
 {
 	int				start;
 	int				end;
-	// int				type;
 	t_token_list	*list;
 
 	start = 0;
 	end = 0;
-	// type = get_type(input[i]);
+	list = NULL;
 	while (input[start])
 	{
 		while (((input[start] >= 8 && input[start] <= 14) || input[start] == 32) && input[start] != '\0')
@@ -81,11 +127,16 @@ void	lexer(char *input)//
 			end++;
 		if (!list)
 			list = list_without_spaces(input, start, end);
-		else	
+		else if (input[start] != '\0' && input[start] != 32)
 			ft_lstadd_back_minishell(&list, list_without_spaces(input, start, end));
 		start = end;
 	}
 	list_value_check(&list);
+	// while(list != NULL)
+	// {
+	// 	printf("%s ", list->tok);
+	// 	list = list->next;
+	// }
 	ft_clear_tokens(&list);
 	write(1, "\n", 1);
 	// return (list);

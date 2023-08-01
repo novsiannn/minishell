@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/01 13:58:34 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:26:37 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,11 @@ void	list_value_split(t_token_list *list)
 		type = get_type(list->tok[i]);
 		while(list->tok[i] != '\0')
 		{
-			printf("%d ", type);
+			if (get_type(list->tok[i]) != type)
+				printf("another\n");
 			i++;
 		}
+		printf("\n NEXT LINKED LIST\n\n");
 		list = list->next;
 	}
 }
@@ -71,6 +73,7 @@ void	lexer(char *input)//
 		start = end;
 	}
 	list_value_split(list);
+	ft_clear_tokens(&list);
 	write(1, "\n", 1);
 	// return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/01 13:08:45 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:25:02 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,6 @@ t_token_list	*create_token(int length, char *start, int type)
 	token -> next = NULL;
 	token -> prev = NULL;
 	return (token);
-}
-
-void	add_token(t_token_list **first, t_token_list *to_add)
-{
-	t_token_list	*temp;
-
-	if (!to_add)
-	{
-		return ;
-	}
-	if (!(*first))
-	{
-		*first = to_add;
-		return ;
-	}
-	temp = *first;
-	while (temp->next)
-		temp = temp -> next;
-	temp->next = to_add;
-	to_add->prev = temp;
 }
 
 void	ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new)
@@ -76,3 +56,25 @@ t_token_list	*ft_lstlast_minishell(t_token_list *lst)
 	return (NULL);
 }
 
+void ft_clear_tokens(t_token_list **tokens)
+{
+ t_token_list *current;
+ t_token_list *tmp;
+
+ if (!tokens || !(*tokens))
+  return ;
+ current = *tokens;
+ while (current)
+ {
+  tmp = current->next;
+  current->len = 0;
+  free(current->tok);
+  current->tok = NULL;
+  current->type = 0;
+  current->next = NULL;
+  current->prev = NULL;
+  free(current);
+  current = tmp;
+ }
+ *tokens = NULL;
+}

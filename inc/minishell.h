@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/01 13:06:34 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 14:25:54 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ typedef struct s_token_list
 	struct s_token_list	*prev;
 }						t_token_list;
 
-char			*read_input();
-int				get_type(char symbol);
-void	lexer(char *input);//
-t_token_list	*list_without_spaces(char *str, int start, int end);
-t_token_list	*create_token(int length, char *start, int type);
-void			add_token(t_token_list **first, t_token_list *to_add);
-void			ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new);
+char				*read_input();
+
+int					get_type(char symbol);
+
+void				lexer(char *input);//
+void				ft_clear_tokens(t_token_list **tokens);
+void				ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new);
+
+t_token_list		*list_without_space(char *str, int start, int end);
+t_token_list		*create_token(int length, char *start, int type);
 t_token_list		*ft_lstlast_minishell(t_token_list *lst);
 #endif

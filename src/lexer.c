@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/01 14:26:37 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 16:17:08 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,36 @@ t_token_list	*list_without_spaces(char *str, int start, int end)
 	return (list);
 }
 
-void	list_value_split(t_token_list *list)
+// void	list_value_split(t_token_list **list)
+// {
+// 	int i = 0;
+
+// 	while(*list != NULL)
+// 	{
+// 		*list = (*list)->next;
+// 		printf("%s ",)
+// 		i++;
+// 	}
+// 	printf("%d", i);
+// }
+
+void	list_value_check(t_token_list **list)
 {
 	int i;
 	int type;
 
-	while(list != NULL)
+	while((*list) != NULL)
 	{
 		i = 0;
-		type = get_type(list->tok[i]);
-		while(list->tok[i] != '\0')
+		type = get_type((*list)->tok[i]);
+		while((*list)->tok[i] != '\0')
 		{
-			if (get_type(list->tok[i]) != type)
-				printf("another\n");
+			if (get_type((*list)->tok[i]) != type)
+				list_value_split(list);
 			i++;
 		}
-		printf("\n NEXT LINKED LIST\n\n");
-		list = list->next;
+		printf("\n next list\n\n");
+		*list = (*list)->next;
 	}
 }
 
@@ -72,7 +85,7 @@ void	lexer(char *input)//
 			ft_lstadd_back_minishell(&list, list_without_spaces(input, start, end));
 		start = end;
 	}
-	list_value_split(list);
+	list_value_check(&list);
 	ft_clear_tokens(&list);
 	write(1, "\n", 1);
 	// return (list);

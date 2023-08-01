@@ -6,16 +6,45 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/01 00:11:20 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:58:34 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	cut_word(char *str, int start, int end)
+t_token_list	*list_without_spaces(char *str, int start, int end)
 {
-	while (*str && start < end)
-		write(1, &str[start++], 1);
+	char *new_str;
+	t_token_list *list;
+	int tmp_start = start;
+	int	i;
+
+	i = 0;
+	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
+	if (!new_str)
+		exit (0);
+	while(tmp_start < end)
+		new_str[i++] = str[tmp_start++];
+	list = create_token(end - start, new_str, 1);
+	return (list);
+}
+
+void	list_value_split(t_token_list *list)
+{
+	int i;
+	int type;
+
+	while(list != NULL)
+	{
+		i = 0;
+		type = get_type(list->tok[i]);
+		while(list->tok[i] != '\0')
+		{
+			printf("%d ", type);
+			i++;
+		}
+		list = list->next;
+	}
 }
 
 void	lexer(char *input)//
@@ -23,6 +52,7 @@ void	lexer(char *input)//
 	int				start;
 	int				end;
 	// int				type;
+	t_token_list	*list;
 
 	start = 0;
 	end = 0;
@@ -34,10 +64,13 @@ void	lexer(char *input)//
 		end = start;
 		while (!(input[start] >= 8 && input[start] <= 14) && input[end] != ' '  && input[end] != '\0')
 			end++;
-		// printf("%d , %d", start, end);
-		cut_word(input, start, end);
+		if (!list)
+			list = list_without_spaces(input, start, end);
+		else	
+			ft_lstadd_back_minishell(&list, list_without_spaces(input, start, end));
 		start = end;
 	}
+	list_value_split(list);
 	write(1, "\n", 1);
 	// return (list);
 }

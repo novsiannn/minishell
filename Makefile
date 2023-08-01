@@ -6,14 +6,14 @@
 #    By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/26 18:59:58 by nikitos           #+#    #+#              #
-#    Updated: 2023/07/31 18:43:30 by novsiann         ###   ########.fr        #
+#    Updated: 2023/08/01 10:57:17 by novsiann         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFT = libft
 
-SRCS = src/main.c src/lexer.c src/read_input.c src/lexer_utils.c
+SRCS = src/main.c src/lexer.c src/read_input.c src/lexer_utils.c src/token.c
 OBJS = ${SRCS:.c=.o}
 
 RM = rm -f

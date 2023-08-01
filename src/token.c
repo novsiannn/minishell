@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/07/31 22:01:14 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/01 13:08:45 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,34 @@ void	add_token(t_token_list **first, t_token_list *to_add)
 		temp = temp -> next;
 	temp->next = to_add;
 	to_add->prev = temp;
+}
+
+void	ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new)
+{
+	t_token_list	*last;
+
+	if (lst)
+	{
+		if (*lst)
+		{
+			last = ft_lstlast_minishell(*lst);
+			last->next = new;
+		}
+		else
+		{
+			*lst = new;
+		}
+	}
+}
+
+t_token_list	*ft_lstlast_minishell(t_token_list *lst)
+{
+	while (lst != NULL)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
 }
 

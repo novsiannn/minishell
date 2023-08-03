@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/03 16:41:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/03 16:59:41 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	list_value_check(t_token_list **list)
 			if (get_type(temp->tok[i]) != type)
 			{
 				list_value_split(&temp, type);
+				i++;
 				break ;
 			}
 			else
@@ -102,7 +103,7 @@ t_token_list	*list_without_spaces(char *str, int start, int end)
 	tmp_start = start;
 	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
 	if (!new_str)
-		exit (0);
+		return NULL;
 	while(tmp_start < end)
 		new_str[i++] = str[tmp_start++];
 	list = create_token(end - start, new_str, 1);

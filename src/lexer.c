@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/01 20:47:21 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/03 16:41:14 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ char *get_word(char *str, int start, int end)
 	return (new_str);
 }
 
-//Iliya eto PIZDA!!!!!!!
 void	list_value_split(t_token_list **list, int type)
 {
 	t_token_list	*tmp;
@@ -44,7 +43,7 @@ void	list_value_split(t_token_list **list, int type)
 	{
 		if(get_type(tmp->tok[end]) != type || tmp->tok[end + 1] == '\0')
 		{
-			if (tmp->tok[end + 1] == '\0')
+			if (tmp->tok[end + 1] == '\0' && get_type(tmp->tok[end]) == type)
 				end++;
 			str = get_word(tmp->tok, start, end);
 			if (!splited_tokens)
@@ -52,18 +51,19 @@ void	list_value_split(t_token_list **list, int type)
 			else
 				ft_lstadd_back_minishell(&splited_tokens, create_token(end - start, str, 1));
 			free(str);
-			// printf("%s\n", str);
-			printf("[%s]\n", splited_tokens->tok);
+			printf("[%s]\n", str);
 			type = get_type(tmp->tok[end]);
 			start = end;
 		}
+		if(get_type(tmp->tok[end - 1]) != type && tmp->tok[end + 1] == '\0' && tmp->tok[end] != '\0')
+		{
+			str = get_word(tmp->tok, start, end + 1);
+			ft_lstadd_back_minishell(&splited_tokens, create_token(end - start, str, 1));
+			printf("[%s]\n", str);
+			free(str);
+		}
 		end++;
 	}
-	// while (splited_tokens != NULL)
-	// {
-	// 	printf("[%s]\n", splited_tokens->tok);
-	// 	splited_tokens = splited_tokens->next;
-	// }
 }
 
 void	list_value_check(t_token_list **list)
@@ -134,7 +134,7 @@ void	lexer(char *input)//
 	list_value_check(&list);
 	// while(list != NULL)
 	// {
-	// 	printf("%s ", list->tok);
+	// 	printf("[%s] \n", list->tok);
 	// 	list = list->next;
 	// }
 	ft_clear_tokens(&list);

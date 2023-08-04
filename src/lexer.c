@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/03 16:59:41 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/04 14:55:14 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	list_value_split(t_token_list **list, int type)
 			else
 				ft_lstadd_back_minishell(&splited_tokens, create_token(end - start, str, 1));
 			free(str);
-			printf("[%s]\n", str);
+			ft_put_between_token(tmp->prev, tmp->next, str);
 			type = get_type(tmp->tok[end]);
 			start = end;
 		}
@@ -133,11 +133,11 @@ void	lexer(char *input)//
 		start = end;
 	}
 	list_value_check(&list);
-	// while(list != NULL)
-	// {
-	// 	printf("[%s] \n", list->tok);
-	// 	list = list->next;
-	// }
+	while(list != NULL)
+	{
+		printf("[%s] \n", list->tok);
+		list = list->next;
+	}
 	ft_clear_tokens(&list);
 	write(1, "\n", 1);
 	// return (list);

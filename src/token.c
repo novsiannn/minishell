@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/04 14:53:15 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/04 19:24:20 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ t_token_list	*create_token(int length, char *start, int type)
 		return (NULL);
 	token -> len = length;
 	token -> type = type;
-	token -> tok = start;
+	token -> tok = ft_strdup(start);
 	token -> next = NULL;
 	token -> prev = NULL;
 	return (token);
@@ -84,17 +84,18 @@ void ft_clear_tokens(t_token_list **tokens)
  *tokens = NULL;
 }
 
-void ft_put_between_token(t_token_list *prev, t_token_list *next, char *value)
+t_token_list	*ft_put_between_token(t_token_list *prev, t_token_list *next, char *value)
 {
- t_token_list *new_token;
- int    length;
+	t_token_list	*new_token;
+	int				length;
 
- if (prev == NULL || next == NULL)
-  return ;
- length = ft_strlen(value);
- new_token = create_token(length, value, 1);
- new_token->next = next;
- new_token->prev = prev;
- prev->next = new_token;
- next->prev = new_token;
+	length = ft_strlen(value);
+	new_token = create_token(length, value, 1);
+	// printf("%p->%p->%p->%s\n",prev,new_token,next,value);
+	if (next != NULL)
+		next->prev = new_token;
+	new_token->next = next;
+	new_token->prev = prev;
+	prev->next = new_token;
+	return (new_token);
 }

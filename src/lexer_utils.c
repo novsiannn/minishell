@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:33:57 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/07 12:10:54 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/07 12:55:21 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ int	get_type(char symbol)
 	else if (symbol == '\'')
 		return (SINGLE_QUOTES);
 	return (WORD);
+}
+
+char	*get_word(char *str, int start, int end)
+{
+	char	*new_str;
+	int		i;
+
+	i = 0;
+	new_str = malloc(sizeof(char) * (end - start + 1));
+	if (!new_str)
+		return (NULL);
+	while (start < end)
+		new_str[i++] = str[start++];
+	new_str[i] = '\0';
+	return (new_str);
 }
 
 void	get_final_type(t_token_list **token)
@@ -56,4 +71,22 @@ void	get_final_type(t_token_list **token)
 			tmp->type = WORD;
 		tmp = tmp->next;
 	}
+}
+
+t_token_list	*delete_spaces(char *str, int start, int end)
+{
+	char			*new_str;
+	t_token_list	*list;
+	int				tmp_start;
+	int				i;
+
+	i = 0;
+	tmp_start = start;
+	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
+	if (!new_str)
+		return (NULL);
+	while (tmp_start < end)
+		new_str[i++] = str[tmp_start++];
+	list = create_token(end - start, new_str, 1);
+	return (list);
 }

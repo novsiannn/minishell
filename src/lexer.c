@@ -6,26 +6,11 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/07 12:35:06 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/07 15:10:31 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-char	*get_word(char *str, int start, int end)
-{
-	char	*new_str;
-	int		i;
-
-	i = 0;
-	new_str = malloc(sizeof(char) * (end - start + 1));
-	if (!new_str)
-		return (NULL);
-	while (start < end)
-		new_str[i++] = str[start++];
-	new_str[i] = '\0';
-	return (new_str);
-}
 
 void	list_value_split(t_token_list **list, int type)
 {
@@ -43,7 +28,7 @@ void	list_value_split(t_token_list **list, int type)
 	buf = ft_strdup(tmp->tok);
 	while (buf[end] != '\0')
 	{
-		if (get_type(buf[end]) != type || buf[end + 1] == '\0')
+	if (get_type(buf[end]) != type || buf[end + 1] == '\0')
 		{
 			if (buf[end + 1] == '\0' && get_type(buf[end]) == type)
 				end++;
@@ -72,7 +57,36 @@ void	list_value_split(t_token_list **list, int type)
 	}
 }
 
-void	list_value_check(t_token_list **list)
+// int	change_first_node(t_token_list *tmp, int start, int end, char *buf)
+// {
+// 	char	*str;
+
+// 	str = get_word(buf, start, end);
+// 	free(tmp->tok);
+// 	tmp->tok = ft_strdup(str);
+// 	tmp->len = ft_strlen(tmp->tok);
+// 	return (1);
+// }
+
+// void	compare_symbols(t_token_list *list, int start, int end, char *buf)
+// {
+// 	char	*str;
+
+// 	str = get_word(buf, start, end);
+// 	list = ft_put_between_token(list, list->next, str);
+// 	free (str);
+// }
+
+// void	last_letter(t_token_list *list, char *buf, int sta, int end)
+// {
+// 	char	*str;
+
+// 	str = get_word(buf, sta, end + 1);
+// 	list = ft_put_between_token(list, list->next, str);
+// 	free(str);
+// }
+
+void	list_value_cmp(t_token_list **list)
 {
 	int				i;
 	int				type;
@@ -88,7 +102,6 @@ void	list_value_check(t_token_list **list)
 			if (get_type(temp->tok[i]) != type)
 			{
 				list_value_split(&temp, type);
-				i++;
 				break ;
 			}
 			else
@@ -98,33 +111,13 @@ void	list_value_check(t_token_list **list)
 	}
 }
 
-t_token_list	*list_without_spaces(char *str, int start, int end)
-{
-	char			*new_str;
-	t_token_list	*list;
-	int				tmp_start;
-	int				i;
-
-	i = 0;
-	tmp_start = start;
-	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
-	if (!new_str)
-		return (NULL);
-	while (tmp_start < end)
-		new_str[i++] = str[tmp_start++];
-	list = create_token(end - start, new_str, 1);
-	return (list);
-}
-
-void	lexer(char *input)
+void	*find_words(char *input, t_token_list **list)
 {
 	int				start;
 	int				end;
-	t_token_list	*list;
 
 	start = 0;
 	end = 0;
-	list = NULL;
 	while (input[start])
 	{
 		while (((input[start] >= 8 && input[start] <= 14) || \
@@ -135,13 +128,22 @@ void	lexer(char *input)
 		input[end] != ' ' && input[end] != '\0')
 			end++;
 		if (!list)
-			list = list_without_spaces(input, start, end);
+			*list = delete_spaces(input, start, end);
 		else if (input[start] != '\0' && input[start] != 32)
-			ft_lstadd_back_minishell(&list, \
-			list_without_spaces(input, start, end));
+			ft_lstadd_back_minishell(list, \
+			delete_spaces(input, start, end));
 		start = end;
 	}
-	list_value_check(&list);
+	return (0);
+}
+
+void	lexer(char *input)
+{
+	t_token_list	*list;
+
+	list = NULL;
+	find_words(input, &list);
+	list_value_cmp(&list);
 	get_final_type(&list);
 	check_quotes(list);
 	while (list != NULL)
@@ -151,5 +153,4 @@ void	lexer(char *input)
 	}
 	ft_clear_tokens(&list);
 	write(1, "\n", 1);
-	// return (list);
 }

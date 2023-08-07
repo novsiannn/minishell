@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/04 19:30:04 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:12:21 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ void	list_value_split(t_token_list **list, int type)
 				splited_tokens = 1;
 				free(tmp->tok);
 				tmp->tok = ft_strdup(str);
+				tmp->len = ft_strlen(tmp->tok);
 			}
 			else
 				tmp = ft_put_between_token(tmp, tmp->next, str);
-			printf("Lexer: %s\n", tmp->tok);//
 			free(str);
 			type = get_type(buf[end]);
 			start = end;
@@ -139,13 +139,15 @@ void	lexer(char *input)//
 		start = end;
 	}
 	list_value_check(&list);
+	get_final_type(&list);
+	check_quotes(list);
 	while(list != NULL)
 	{
-		printf("[%s] \n", list->tok);
+		printf("[%s] - [%d] \n", list->tok, list->type);
 		// printf("%p<-%p->%p\n",list->prev, list, list->next);
 		list = list->next;
 	}
-	// ft_clear_tokens(&list);
+	ft_clear_tokens(&list);
 	write(1, "\n", 1);
 	// return (list);
 }

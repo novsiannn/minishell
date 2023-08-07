@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/04 18:58:05 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/06 16:11:58 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WORD 0
 # define PIPE 1 // |
-# define SPACE 2 // ' '
+# define SPAC 2 // ' '
 # define GREATER_THAN 3 // >
 # define LESS_THAN 4 // <
 # define DOUBLE_QUOTES 5 // "
@@ -47,6 +47,9 @@ int					get_type(char symbol);
 void				lexer(char *input);//
 void				ft_clear_tokens(t_token_list **tokens);
 void				ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new);
+void				get_final_type(t_token_list **token);
+void 				check_quotes(t_token_list *tokens);
+
 t_token_list	*ft_put_between_token(t_token_list *prev, t_token_list *next, char *value);
 
 

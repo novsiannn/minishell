@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   read_input.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:53:49 by novsiann          #+#    #+#             */
-/*   Updated: 2023/07/31 17:06:55 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:11:16 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char *read_input()
+char	*read_input(void)
 {
 	char	cwd[256];
 	char	*ret;
@@ -22,5 +22,5 @@ char *read_input()
 	ret = readline(cwd);
 	if (ret && *ret)
 		add_history(ret);
-	return(ret);
+	return (ret);
 }

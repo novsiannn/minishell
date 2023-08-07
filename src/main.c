@@ -3,26 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/06 13:33:11 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:12:05 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int main()
+int	main(void)
 {
-	char *str;
-	// t_token_list	*tokens;
+	char	*str;
 
-	while(1)
+	while (1)
 	{
 		str = read_input();
 		if (!str)
 			return (0);
-		lexer(str);// tokens =
+		lexer(str);
 	}
 	return (1);
 }

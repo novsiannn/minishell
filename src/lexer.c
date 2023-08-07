@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/06 16:12:21 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:35:06 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-char *get_word(char *str, int start, int end)
+char	*get_word(char *str, int start, int end)
 {
-	char 	*new_str;
+	char	*new_str;
 	int		i;
 
 	i = 0;
@@ -57,33 +57,33 @@ void	list_value_split(t_token_list **list, int type)
 			}
 			else
 				tmp = ft_put_between_token(tmp, tmp->next, str);
-			free(str);
+			free (str);
 			type = get_type(buf[end]);
 			start = end;
 		}
-		if (get_type(buf[end - 1]) != type && buf[end + 1] == '\0' && buf[end] != '\0')
+		if (get_type(buf[end - 1]) != type && \
+		buf[end + 1] == '\0' && buf[end] != '\0')
 		{
 			str = get_word(buf, start, end + 1);
 			tmp = ft_put_between_token(tmp, tmp->next, str);
 			free(str);
 		}
-
 		end++;
 	}
 }
 
 void	list_value_check(t_token_list **list)
 {
-	int 			i;
-	int 			type;
+	int				i;
+	int				type;
 	t_token_list	*temp;
 
 	temp = *list;
-	while(temp != NULL)
+	while (temp != NULL)
 	{
 		i = 0;
 		type = get_type(temp->tok[i]);
-		while(temp->tok[i] != '\0')
+		while (temp->tok[i] != '\0')
 		{
 			if (get_type(temp->tok[i]) != type)
 			{
@@ -100,23 +100,23 @@ void	list_value_check(t_token_list **list)
 
 t_token_list	*list_without_spaces(char *str, int start, int end)
 {
-	char *new_str;
-	t_token_list *list;
-	int tmp_start;
-	int	i;
+	char			*new_str;
+	t_token_list	*list;
+	int				tmp_start;
+	int				i;
 
 	i = 0;
 	tmp_start = start;
 	new_str = malloc(sizeof(char *) * (end - tmp_start + 1));
 	if (!new_str)
-		return NULL;
-	while(tmp_start < end)
+		return (NULL);
+	while (tmp_start < end)
 		new_str[i++] = str[tmp_start++];
 	list = create_token(end - start, new_str, 1);
 	return (list);
 }
 
-void	lexer(char *input)//
+void	lexer(char *input)
 {
 	int				start;
 	int				end;
@@ -127,24 +127,26 @@ void	lexer(char *input)//
 	list = NULL;
 	while (input[start])
 	{
-		while (((input[start] >= 8 && input[start] <= 14) || input[start] == 32) && input[start] != '\0')
+		while (((input[start] >= 8 && input[start] <= 14) || \
+		input[start] == 32) && input[start] != '\0')
 			start++;
 		end = start;
-		while (!(input[start] >= 8 && input[start] <= 14) && input[end] != ' '  && input[end] != '\0')
+		while (!(input[start] >= 8 && input[start] <= 14) && \
+		input[end] != ' ' && input[end] != '\0')
 			end++;
 		if (!list)
 			list = list_without_spaces(input, start, end);
 		else if (input[start] != '\0' && input[start] != 32)
-			ft_lstadd_back_minishell(&list, list_without_spaces(input, start, end));
+			ft_lstadd_back_minishell(&list, \
+			list_without_spaces(input, start, end));
 		start = end;
 	}
 	list_value_check(&list);
 	get_final_type(&list);
 	check_quotes(list);
-	while(list != NULL)
+	while (list != NULL)
 	{
 		printf("[%s] - [%d] \n", list->tok, list->type);
-		// printf("%p<-%p->%p\n",list->prev, list, list->next);
 		list = list->next;
 	}
 	ft_clear_tokens(&list);

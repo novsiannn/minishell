@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:33:57 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/06 16:12:41 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/07 12:10:54 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ int	get_type(char symbol)
 
 void	get_final_type(t_token_list **token)
 {
-	t_token_list *tmp;
+	t_token_list	*tmp;
 
 	tmp = *token;
-	while(tmp)
+	while (tmp)
 	{
 		if (tmp->tok[0] == '|' && tmp->len == 1)
 			tmp->type = PIPE;
@@ -46,14 +46,14 @@ void	get_final_type(t_token_list **token)
 			tmp->type = DOUBLE_QUOTES;
 		else if (tmp->tok[0] == '\'' && tmp->len == 1)
 			tmp->type = SINGLE_QUOTES;
-		else if(tmp->len == 2 && tmp->tok[0] == '<' && tmp->tok[1] == '<')
+		else if (tmp->len == 2 && tmp->tok[0] == '<' && tmp->tok[1] == '<')
 			tmp->type = HEREDOCK;
-		else if(tmp->len == 2 && tmp->tok[0] == '>' && tmp->tok[1] == '>')
+		else if (tmp->len == 2 && tmp->tok[0] == '>' && tmp->tok[1] == '>')
 			tmp->type = APPEND;
-		else if(tmp->len == 2 && tmp->tok[0] == '-' && tmp->tok[1] == 'n')
+		else if (tmp->len == 2 && tmp->tok[0] == '-' && tmp->tok[1] == 'n')
 			tmp->type = EXPANSION;
 		else
-			tmp->type = WORD;		
+			tmp->type = WORD;
 		tmp = tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/07 14:46:33 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/08 19:33:17 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,9 @@ typedef struct s_token_list
 	int					len;
 	char				*tok;
 	int					type;
+	int					corrective_token;
+	int					i;
+	int					k;
 	struct s_token_list	*next;
 	struct s_token_list	*prev;
 }						t_token_list;
@@ -43,10 +46,12 @@ typedef struct s_token_list
 char				*read_input(void);
 char				*get_word(char *str, int start, int end);
 int					get_type(char symbol);
-int					change_first_node(t_token_list *tmp, int start, \
-int end, char *buf);
-void				compare_symbols(t_token_list *list, int start, \
-int end, char *buf);
+void				change_node(t_token_list *tmp, \
+char *buf, t_token_list **list);
+void				split_value(t_token_list **tmp, \
+char *buf, t_token_list **list, int *type);
+void				last_letter(t_token_list *list, \
+char *buf, int sta, int end);
 
 void				lexer(char *input);//
 void				ft_clear_tokens(t_token_list **tokens);
@@ -55,7 +60,8 @@ t_token_list *new);
 void				get_final_type(t_token_list **token);
 void				check_quotes(t_token_list *tokens);
 void				*find_words(char *input, t_token_list **list);
-void				last_letter(t_token_list *list, char *buf, int sta, int end);
+void				list_value_cmp(t_token_list **list);
+void				list_value_split(t_token_list **list, int type);
 
 t_token_list		*ft_put_between_token(t_token_list *prev, \
 t_token_list *next, char *value);

@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   pars_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/08 21:53:33 by novsiann         ###   ########.fr       */
+/*   Created: 2023/08/08 23:18:14 by novsiann          #+#    #+#             */
+/*   Updated: 2023/08/08 23:20:57 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	main(void)
+int	ft_lstsize_n(t_token_list *start, t_token_list *finish)
 {
-	t_token_list	*list;
-	char			*str;
+	int	i;
 
-	while (1)
+	i = 0;
+	while(start != finish)
 	{
-		str = read_input();
-		if (!str)
-			return (0);
-		list = lexer(str);
-		parse(list);
-		ft_clear_tokens(&list);
+		i++;
+		start = start->next;
 	}
-	return (1);
+	return (i);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lexer_2.c                                          :+:      :+:    :+:   */
+/*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/08 19:29:41 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/08 21:27:04 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	*find_words(char *input, t_token_list **list)
 	return (0);
 }
 
-void	lexer(char *input)
+t_token_list	*lexer(char *input)
 {
 	t_token_list	*list;
 
@@ -87,11 +87,5 @@ void	lexer(char *input)
 	list_value_cmp(&list);
 	get_final_type(&list);
 	check_quotes(list);
-	while (list != NULL)
-	{
-		printf("[%s] - [%d] \n", list->tok, list->type);
-		list = list->next;
-	}
-	ft_clear_tokens(&list);
-	write(1, "\n", 1);
+	return(list);
 }

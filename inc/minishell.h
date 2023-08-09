@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/09 09:14:10 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:25:01 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void				last_letter(t_token_list *list, \
 char *buf, int sta, int end);
 
 void				ft_clear_tokens(t_token_list **tokens);
+void				lst_addpipe_back(t_pipe_group **lst, t_pipe_group *new);
 void				ft_lstadd_back_minishell(t_token_list **lst, \
 t_token_list *new);
 void				get_final_type(t_token_list **token);
@@ -78,6 +79,8 @@ void				list_value_cmp(t_token_list **list);
 void				list_value_split(t_token_list **list, int type);
 void				pipe_grp_mmry(t_pipe_group **pipe_grp, t_token_list *start, t_token_list *finish);
 void				parse(t_token_list *list);
+
+t_pipe_group	*ft_lastpipe(t_pipe_group *lst);
 
 t_token_list		*ft_put_between_token(t_token_list *prev, \
 t_token_list *next, char *value);

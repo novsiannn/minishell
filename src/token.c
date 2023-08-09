@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:45:23 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/09 13:24:46 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,17 @@ void	ft_lstadd_back_minishell(t_token_list **lst, t_token_list *new)
 }
 
 t_token_list	*ft_lstlast_minishell(t_token_list *lst)
+{
+	while (lst != NULL)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		lst = lst->next;
+	}
+	return (NULL);
+}
+
+t_pipe_group	*ft_lastpipe(t_pipe_group *lst)
 {
 	while (lst != NULL)
 	{

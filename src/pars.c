@@ -6,29 +6,13 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/06 14:03:19 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/09 13:25:29 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/09 09:44:23 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void    lst_addpipe_back(t_pipe_group **lst, t_pipe_group *new)
-{
-    t_pipe_group    *last;
 
-    if(new == NULL)
-        return ;
-     if (lst)
-	{
-		if (*lst)
-		{
-			last = ft_lastpipe(*lst);
-			last->next = new;
-		}
-		else
-			*lst = new;
-	}
-}
 
 void    parse(t_token_list *list)
 {
@@ -55,8 +39,8 @@ void    parse(t_token_list *list)
             {
                 if(!pipe_grp)
                     pipe_grp = create_pipe_group(s_tmp, f_tmp);
-                else
-                    lst_addpipe_back(&pipe_grp, create_pipe_group(s_tmp, f_tmp));
+                // else
+                //     pipe_grp->next = create_pipe_group(s_tmp, f_tmp);
                 s_tmp = f_tmp;
             }
             i++;   
@@ -64,9 +48,9 @@ void    parse(t_token_list *list)
         f_tmp = f_tmp->next;
     }
     i = 0;
-    while(pipe_grp->argv[i] != NULL)
-    {
-        printf("String - [%s]\n", pipe_grp->argv[i]);
-        i++;
-    }
+    // while(pipe_grp->argv[i] != NULL)
+    // {
+    //     printf("String - [%s]\n", pipe_grp->argv[1]);
+    //     i++;
+    // }
 }

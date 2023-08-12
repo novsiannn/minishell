@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/09 13:25:01 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/11 21:08:35 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,23 +53,37 @@ typedef struct s_pipe_group
 	int					pipe_index;
 	char				*heredoc;
 	struct s_pipe_group	*next;
-}						t_pipe_group;			
+}						t_pipe_group;
+
+typedef struct s_minishell
+{
+	char			**envp;
+	int				error;
+	int				current_env;
+	int				last;
+	t_pipe_group	*pipes;
+}			t_minishell;
+
+t_minishell *g_shell_h;
 
 char				*read_input(void);
 char				*get_word(char *str, int start, int end);
+char				*find_in_env(char *str);
 
 int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 int					get_type(char symbol);
+int					assign_env(char **envp);
 
 void				change_node(t_token_list *tmp, \
 char *buf, t_token_list **list);
 void				split_value(t_token_list **tmp, \
 char *buf, t_token_list **list, int *type);
+void				init_vars_env(int	*counter, char ***env, char **envp, int *i);
 void				last_letter(t_token_list *list, \
 char *buf, int sta, int end);
+void				print_env(void);
 
 void				ft_clear_tokens(t_token_list **tokens);
-void				lst_addpipe_back(t_pipe_group **lst, t_pipe_group *new);
 void				ft_lstadd_back_minishell(t_token_list **lst, \
 t_token_list *new);
 void				get_final_type(t_token_list **token);
@@ -80,10 +94,8 @@ void				list_value_split(t_token_list **list, int type);
 void				pipe_grp_mmry(t_pipe_group **pipe_grp, t_token_list *start, t_token_list *finish);
 void				parse(t_token_list *list);
 
-t_pipe_group	*ft_lastpipe(t_pipe_group *lst);
-
 t_token_list		*ft_put_between_token(t_token_list *prev, \
-t_token_list *next, char *value);
+t_token_list*next, char *value);
 t_token_list		*lexer(char *input);
 t_token_list		*delete_spaces(char *str, int start, int end);
 t_token_list		*create_token(int length, char *start, int type);

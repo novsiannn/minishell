@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/11 19:19:25 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/12 21:51:52 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	init_main(int argc, char **argv, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	// t_token_list	*list;
+	t_token_list	*list;
 	char			*str;
 
 	init_main(argc, argv, env);
@@ -31,10 +31,15 @@ int	main(int argc, char **argv, char **env)
 		str = read_input();
 		if (!str)
 			return (0);
-		printf("%s\n", find_in_env(str));
-		// list = lexer(str);
+		// printf("%s\n", find_in_env(str));
+		list = lexer(str);
+		while(list != NULL)
+		{
+			printf("[%s]\n", list->tok);
+			list = list->next;
+		}
 		// parse(list);
-		// ft_clear_tokens(&list);
+		ft_clear_tokens(&list);
 	}
 	return (1);
 }

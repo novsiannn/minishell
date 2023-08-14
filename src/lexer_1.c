@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 17:37:06 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:12:00 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,20 +78,15 @@ void	*find_words(char *input, t_token_list **list)
 
 void	split_quotes(t_token_list *tmp)
 {
-	// int		i;
-	char	*buf;
-
-	// i = 0;
-	buf = ft_strdup(tmp->tok);
+	int		len;
+	len = ft_strlen(tmp->tok);
 	free(tmp->tok);
-	tmp->tok = buf;
+	tmp->tok = NULL;
 	tmp->len = 1;
-	// printf("%s\n", buf);
-	// lst->len = ft_strlen(lst->tok);
-	// printf("%s\n", lst->tok);
-	// while (lst->tok[i])
+	// while(len > 0)
 	// {
-
+	// 	ft_put_between_token();
+	// 	len--;
 	// }
 }
 

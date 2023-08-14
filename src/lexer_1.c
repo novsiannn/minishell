@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 19:12:00 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/14 19:22:56 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	split_quotes(t_token_list *tmp)
 	free(tmp->tok);
 	tmp->tok = NULL;
 	tmp->len = 1;
+	printf("%d", len);
 	// while(len > 0)
 	// {
 	// 	ft_put_between_token();
@@ -116,8 +117,8 @@ t_token_list	*lexer(char *input)
 	list->i = 0;
 	list->k = 0;
 	list_value_cmp(&list);
-	check_repeat_quotes(&list);
 	get_final_type(&list);
+	check_repeat_quotes(&list);
 	// check_quotes(list);
 	return(list);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/14 15:49:50 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:41:16 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,18 +28,13 @@ int	main(int argc, char **argv, char **env)
 	init_main(argc, argv, env);
 	while (1)
 	{
-		str = "\"\"";
+		str = read_input();
 		if (!str)
 			return (0);
 		// printf("%s\n", find_in_env(str));
 		list = lexer(str);
-		// while(list != NULL)
-		// {
-		// 	printf("[%s]\n", list->tok);
-		// 	list = list->next;
-		// }
 		// parse(list);
-		ft_clear_tokens(&list);
+		// ft_clear_tokens(&list);
 	}
 	return (1);
 }

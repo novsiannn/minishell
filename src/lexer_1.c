@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 15:51:45 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 17:37:06 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,8 @@ void	split_quotes(t_token_list *tmp)
 	buf = ft_strdup(tmp->tok);
 	free(tmp->tok);
 	tmp->tok = buf;
-	// free(lst->tok);
-	printf("%s\n", buf);
+	tmp->len = 1;
+	// printf("%s\n", buf);
 	// lst->len = ft_strlen(lst->tok);
 	// printf("%s\n", lst->tok);
 	// while (lst->tok[i])

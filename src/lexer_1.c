@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 20:56:07 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 21:01:38 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	split_quotes(t_token_list *tmp)
 	len = ft_strlen(tmp->tok);
 	free(tmp->tok);
 	tmp->tok = NULL;
-	tmp->len = 1;
+	tmp->len = 0;
 	tmp->type = type;
 	while(len > 1)
 	{

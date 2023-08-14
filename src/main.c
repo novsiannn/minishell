@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/12 21:51:52 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 15:49:50 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int	main(int argc, char **argv, char **env)
 	init_main(argc, argv, env);
 	while (1)
 	{
-		str = read_input();
+		str = "\"\"";
 		if (!str)
 			return (0);
 		// printf("%s\n", find_in_env(str));
 		list = lexer(str);
-		while(list != NULL)
-		{
-			printf("[%s]\n", list->tok);
-			list = list->next;
-		}
+		// while(list != NULL)
+		// {
+		// 	printf("[%s]\n", list->tok);
+		// 	list = list->next;
+		// }
 		// parse(list);
 		ft_clear_tokens(&list);
 	}

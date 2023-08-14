@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   token.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/08 18:45:23 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/14 14:15:59 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,5 @@ t_token_list *next, char *value)
 	new_token->next = next;
 	new_token->prev = prev;
 	prev->next = new_token;
-	return (new_token);
+		return (new_token);
 }

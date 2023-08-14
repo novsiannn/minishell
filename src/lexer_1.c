@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/08 21:27:04 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/08/14 15:51:45 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,42 @@ void	*find_words(char *input, t_token_list **list)
 	return (0);
 }
 
+void	split_quotes(t_token_list *tmp)
+{
+	// int		i;
+	char	*buf;
+
+	// i = 0;
+	buf = ft_strdup(tmp->tok);
+	free(tmp->tok);
+	tmp->tok = buf;
+	// free(lst->tok);
+	printf("%s\n", buf);
+	// lst->len = ft_strlen(lst->tok);
+	// printf("%s\n", lst->tok);
+	// while (lst->tok[i])
+	// {
+
+	// }
+}
+
+
+void	check_repeat_quotes(t_token_list **list)
+{
+	t_token_list	*tmp;
+
+	tmp = *list;
+	while(tmp != NULL)
+	{
+			if(tmp->tok[0] == '\"' || tmp->tok[0] == '\'')
+			{
+				if (tmp->tok[1] == tmp->tok[0])
+					split_quotes(tmp);
+			}
+		tmp = tmp->next;
+	}
+}
+
 t_token_list	*lexer(char *input)
 {
 	t_token_list	*list;
@@ -85,7 +121,8 @@ t_token_list	*lexer(char *input)
 	list->i = 0;
 	list->k = 0;
 	list_value_cmp(&list);
+	check_repeat_quotes(&list);
 	get_final_type(&list);
-	check_quotes(list);
+	// check_quotes(list);
 	return(list);
 }

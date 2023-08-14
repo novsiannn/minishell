@@ -1,0 +1,9 @@
+{
+	"makefile.launchConfigurations": [
+		{
+			"cwd": "/Users/nikitos/Desktop/42study/my_minishell",
+			"binaryPath": "/Users/nikitos/Desktop/42study/my_minishell/minishell",
+			"binaryArgs": []
+		}
+	]
+}

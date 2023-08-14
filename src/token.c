@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/14 14:15:59 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:25:39 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ t_token_list	*create_token(int length, char *start, int type)
 		return (NULL);
 	token -> len = length;
 	token -> type = type;
-	token -> tok = ft_strdup(start);
+	if(start != NULL)	
+		token -> tok = ft_strdup(start);
 	token -> next = NULL;
 	token -> prev = NULL;
 	return (token);
@@ -89,7 +90,10 @@ t_token_list *next, char *value)
 	t_token_list	*new_token;
 	int				length;
 
+	if (value)
 	length = ft_strlen(value);
+	else
+		length = 1;
 	new_token = create_token(length, value, 1);
 	if (next != NULL)
 		next->prev = new_token;

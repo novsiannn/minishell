@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/14 19:24:35 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:52:12 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		str = read_input();
-		// str = " sdkos scds \"\" ";
+		// str = "heasd `\'\"|\"||\"\" ";
 		if (!str)
 			return (0);
 		// printf("%s\n", find_in_env(str));
 		list = lexer(str);
 		while(list != NULL)
 		{
-			printf("[%s]\n", list->tok);
+			printf("[%d] - [%s]\n", list->type, list->tok);
 			list = list->next;
 		}
 		// parse(list);

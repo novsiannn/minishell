@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 19:22:56 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/14 20:56:07 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,16 +79,20 @@ void	*find_words(char *input, t_token_list **list)
 void	split_quotes(t_token_list *tmp)
 {
 	int		len;
+	int		type;
+
+	type = get_type(tmp->tok[0]);
 	len = ft_strlen(tmp->tok);
 	free(tmp->tok);
 	tmp->tok = NULL;
 	tmp->len = 1;
-	printf("%d", len);
-	// while(len > 0)
-	// {
-	// 	ft_put_between_token();
-	// 	len--;
-	// }
+	tmp->type = type;
+	while(len > 1)
+	{
+		tmp = ft_put_between_token(tmp, tmp->next, NULL);
+		tmp->type = type;
+		len--;
+	}
 }
 
 
@@ -99,11 +103,11 @@ void	check_repeat_quotes(t_token_list **list)
 	tmp = *list;
 	while(tmp != NULL)
 	{
-			if(tmp->tok[0] == '\"' || tmp->tok[0] == '\'')
-			{
-				if (tmp->tok[1] == tmp->tok[0])
-					split_quotes(tmp);
-			}
+		if (tmp->tok && (tmp->tok[0] == '\"' || tmp->tok[0] == '\''))
+		{
+			if (tmp->tok[1] == tmp->tok[0])
+				split_quotes(tmp);
+		}
 		tmp = tmp->next;
 	}
 }

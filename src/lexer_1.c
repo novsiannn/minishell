@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 21:01:38 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/16 17:16:14 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,11 +118,14 @@ t_token_list	*lexer(char *input)
 
 	list = NULL;
 	find_words(input, &list);
-	list->i = 0;
-	list->k = 0;
-	list_value_cmp(&list);
-	get_final_type(&list);
-	check_repeat_quotes(&list);
+	if (list != NULL)
+	{
+		list->i = 0;
+		list->k = 0;
+		list_value_cmp(&list);
+		get_final_type(&list);
+		check_repeat_quotes(&list);
+	}
 	// check_quotes(list);
 	return(list);
 }

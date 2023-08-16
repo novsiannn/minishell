@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/14 20:57:58 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/16 19:40:06 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_token_list
 	int					corrective_token;
 	int					i;
 	int					k;
+	int					spaces;
 	struct s_token_list	*next;
 	struct s_token_list	*prev;
 }						t_token_list;
@@ -97,7 +98,7 @@ void				parse(t_token_list *list);
 t_token_list		*ft_put_between_token(t_token_list *prev, \
 t_token_list*next, char *value);
 t_token_list		*lexer(char *input);
-t_token_list		*delete_spaces(char *str, int start, int end);
+t_token_list		*delete_spaces(char *str, int start, int end, int spaces);
 t_token_list		*create_token(int length, char *start, int type);
 t_token_list		*ft_lstlast_minishell(t_token_list *lst);
 

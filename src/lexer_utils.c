@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:33:57 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 20:18:30 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/16 19:38:40 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	get_final_type(t_token_list **token)
 	}
 }
 
-t_token_list	*delete_spaces(char *str, int start, int end)
+t_token_list	*delete_spaces(char *str, int start, int end, int spaces)
 {
 	char			*new_str;
 	t_token_list	*list;
@@ -88,5 +88,6 @@ t_token_list	*delete_spaces(char *str, int start, int end)
 	while (tmp_start < end)
 		new_str[i++] = str[tmp_start++];
 	list = create_token(end - start, new_str, 1);
+	list->spaces = spaces;
 	return (list);
 }

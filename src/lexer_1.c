@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/16 17:16:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/16 19:41:04 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	*find_words(char *input, t_token_list **list)
 {
 	int				start;
 	int				end;
+	int				spaces;
 
 	start = 0;
 	end = 0;
@@ -62,15 +63,16 @@ void	*find_words(char *input, t_token_list **list)
 		while (((input[start] >= 8 && input[start] <= 14) || \
 		input[start] == 32) && input[start] != '\0')
 			start++;
+		spaces = start - end;
 		end = start;
 		while (!(input[start] >= 8 && input[start] <= 14) && \
 		input[end] != ' ' && input[end] != '\0')
 			end++;
 		if (!list)
-			*list = delete_spaces(input, start, end);
+			*list = delete_spaces(input, start, end, spaces);
 		else if (input[start] != '\0' && input[start] != 32)
 			ft_lstadd_back_minishell(list, \
-			delete_spaces(input, start, end));
+			delete_spaces(input, start, end, spaces));
 		start = end;
 	}
 	return (0);

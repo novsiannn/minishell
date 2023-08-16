@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/16 17:24:42 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/16 19:34:20 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	init_main(int argc, char **argv, char **env)
 int	main(int argc, char **argv, char **env)
 {
 	t_token_list	*list;
+	t_token_list	*tmp;
 	char			*str;
 
 	init_main(argc, argv, env);
@@ -34,11 +35,13 @@ int	main(int argc, char **argv, char **env)
 			return (0);
 		// printf("%s\n", find_in_env(str));
 		list = lexer(str);
-		// while(list != NULL)
-		// {
-		// 	printf("[%d] - [%s]\n", list->type, list->tok);
-		// 	list = list->next;
-		// }
+		if (list)
+			tmp = list;
+		while(tmp != NULL)
+		{
+			printf("[%d] - [%s] - [%d] \n", tmp->type, tmp->tok, tmp->spaces);
+			tmp = tmp->next;
+		}
 		// parse(list);
 		ft_clear_tokens(&list);
 	}

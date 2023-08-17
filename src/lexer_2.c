@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/08 19:29:07 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/14 14:19:57 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/17 20:03:24 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,22 @@ void	last_letter(t_token_list *list, char *buf, int sta, int end)
 	free(str);
 }
 
+void	check_empty_token(t_token_list **tmp)
+{
+	t_token_list	*next;
+
+	next = (*tmp)->next;
+	if (!(*tmp)->tok)
+	{
+		if((*tmp)->prev)
+			(*tmp)->prev->next = (*tmp)->next;
+		if((*tmp)->next)
+			(*tmp)->next->prev = (*tmp)->prev;
+		free((*tmp));
+		(*tmp) = next;
+	}
+}
+
 void	list_value_cmp(t_token_list **list)
 {
 	int				i;
@@ -40,8 +56,9 @@ void	list_value_cmp(t_token_list **list)
 	t_token_list	*temp;
 
 	temp = *list;
-	while (temp != NULL)
+	while (temp != NULL && temp->tok)
 	{
+		check_empty_token(&temp);
 		i = 0;
 		type = get_type(temp->tok[i]);
 		while (temp->tok[i] != '\0')

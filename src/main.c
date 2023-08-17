@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/16 19:34:20 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/17 20:16:08 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,12 @@ int	main(int argc, char **argv, char **env)
 	init_main(argc, argv, env);
 	while (1)
 	{
-		str = read_input();
-		// str = "hei asd|";
-		if (!str)
-			return (0);
+		// list = NULL;
+		str = " asdas;ldals\'\"\"ASD|||\\\"\"\"AS";
+		// str = read_input();
+		// str = "hei\"\'\"\"\"ei\"\'\"\"\" asd| asd|";
+		// if (!str)
+		// 	return (0);
 		// printf("%s\n", find_in_env(str));
 		list = lexer(str);
 		if (list)
@@ -44,6 +46,7 @@ int	main(int argc, char **argv, char **env)
 		}
 		// parse(list);
 		ft_clear_tokens(&list);
+		//free(str);
 	}
 	return (1);
 }

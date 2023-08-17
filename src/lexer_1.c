@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/16 19:41:04 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/17 20:17:38 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	list_value_split(t_token_list **list, int type)
 			last_letter(tmp, buf, (*list)->i, (*list)->k);
 		(*list)->k++;
 	}
+	(*list)->k = 0;
 }
 
 void	split_value(t_token_list **tmp, char *buf, \
@@ -68,7 +69,7 @@ void	*find_words(char *input, t_token_list **list)
 		while (!(input[start] >= 8 && input[start] <= 14) && \
 		input[end] != ' ' && input[end] != '\0')
 			end++;
-		if (!list)
+		if (!(*list))
 			*list = delete_spaces(input, start, end, spaces);
 		else if (input[start] != '\0' && input[start] != 32)
 			ft_lstadd_back_minishell(list, \
@@ -105,7 +106,7 @@ void	check_repeat_quotes(t_token_list **list)
 	tmp = *list;
 	while(tmp != NULL)
 	{
-		if (tmp->tok && (tmp->tok[0] == '\"' || tmp->tok[0] == '\''))
+		if (tmp->tok != NULL && (tmp->tok[0] == '\"' || tmp->tok[0] == '\''))
 		{
 			if (tmp->tok[1] == tmp->tok[0])
 				split_quotes(tmp);

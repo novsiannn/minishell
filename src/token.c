@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/16 17:24:24 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/17 19:54:09 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ t_token_list *next, char *value)
 	int				length;
 
 	if (value)
-	length = ft_strlen(value);
+		length = ft_strlen(value);
 	else
 		length = 1;
 	new_token = create_token(length, value, 1);

@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 19:24:39 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/17 19:54:09 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/18 20:01:45 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,29 +59,6 @@ t_token_list	*ft_lstlast_minishell(t_token_list *lst)
 		lst = lst->next;
 	}
 	return (NULL);
-}
-
-void	ft_clear_tokens(t_token_list **tokens)
-{
-	t_token_list	*current;
-	t_token_list	*tmp;
-
-	if (!tokens || !(*tokens))
-		return ;
-	current = *tokens;
-	while (current)
-	{
-		tmp = current->next;
-		current->len = 0;
-		free(current->tok);
-		current->tok = NULL;
-		current->type = 0;
-		current->next = NULL;
-		current->prev = NULL;
-		free(current);
-		current = tmp;
-	}
-	*tokens = NULL;
 }
 
 t_token_list	*ft_put_between_token(t_token_list *prev, \

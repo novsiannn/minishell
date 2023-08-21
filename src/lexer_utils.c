@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:33:57 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/17 19:51:54 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/18 21:50:53 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,26 +69,39 @@ void	get_final_type(t_token_list **token)
 			tmp->type = EXPANSION;
 		else
 			tmp->type = WORD;
+	
 		tmp = tmp->next;
 	}
 }
 
-t_token_list	*delete_spaces(char *str, int start, int end, int spaces)
+int	get_words_minishell(char *str)
 {
-	char			*new_str;
-	t_token_list	*list;
-	int				tmp_start;
-	int				i;
+	int n;
+
+	n = 0;
+	while (*str == ' ' || *str == '\t' || *str == '\n')
+		str++;
+	while (*str != '\0')
+	{
+		n++;
+		if (*str == '\'' || *str == '\"' || *str == ' ')
+		{
+			str++;
+			continue;
+		}
+		while (*str != '\0' && *str != ' ' && *str != '\"' \
+		&& *str != '\t' && *str != '\n' && *str != '\'')
+			str++;
+	}
+	return (n);
+}
+
+int	ft_strcmp(char *s1, char *s2)
+{
+	int	i;
 
 	i = 0;
-	tmp_start = start;
-	new_str = malloc(sizeof(char) * (end - tmp_start + 1));
-	if (!new_str)
-		return (NULL);
-	while (tmp_start < end)
-		new_str[i++] = str[tmp_start++];
-	new_str[i] = 0; 
-	list = create_token(end - start, new_str, 1);
-	list->spaces = spaces;
-	return (list);
+	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0')
+		i++;
+	return (s1[i] - s2[i]);
 }

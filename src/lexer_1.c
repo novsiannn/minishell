@@ -6,129 +6,128 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/17 20:17:38 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/21 20:41:50 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	list_value_split(t_token_list **list, int type)
+char	**ft_split_minishell(char *input)
+{
+	char	**array;
+	int		words;
+
+	words = get_words_minishell(input);
+	array = malloc(sizeof(char *) * (words + 1));
+	array[words] = 0;
+	fill_array(array, input);
+	return (array);
+}
+
+int	check_closed_brackets(char **splited)
+{
+	int	i;
+	int	quote;
+
+	quote = 0;
+	i = 0;
+	while (splited[i])
+	{
+		if (quote)
+		{
+			if (quote == 1 && (ft_strcmp(splited[i],"\'") == 0))
+				quote = 0;
+			else if (quote == 2 && (ft_strcmp(splited[i],"\"") == 0))
+				quote = 0;
+		}
+		else if (ft_strcmp(splited[i],"\'") == 0)
+			quote = 1;
+		else if (ft_strcmp(splited[i],"\"") == 0)
+			quote = 2;
+		i++;
+	}
+	if (quote)
+		return (1);
+	return (0);
+}
+
+void	cat_quote(char **splited, int *words, t_token_list **head)
 {
 	t_token_list	*tmp;
-	char			*buf;
+	char			quote;
 
-	tmp = *list;
-	buf = ft_strdup(tmp->tok);
-	while (buf[(*list)->k] != '\0')
+	tmp = malloc(sizeof(t_token_list));
+	tmp->tok = NULL; 
+	quote = splited[*words][0];
+	(*words)--;
+	while(*words >= 0 && splited[*words][0] != quote)
 	{
-		if (get_type(buf[(*list)->k]) != type || buf[(*list)->k + 1] == '\0')
-		{
-			if (buf[(*list)->k + 1] == '\0' && \
-			get_type(buf[(*list)->k]) == type)
-				(*list)->k++;
-			split_value(&tmp, buf, list, &type);
-		}
-		if (get_type(buf[(*list)->k - 1]) != type && \
-		buf[(*list)->k + 1] == '\0' && buf[(*list)->k] != '\0')
-			last_letter(tmp, buf, (*list)->i, (*list)->k);
-		(*list)->k++;
+		strjoin_free(&(tmp->tok), splited[*words]);
+		(*words)--;
 	}
-	(*list)->k = 0;
-}
-
-void	split_value(t_token_list **tmp, char *buf, \
-t_token_list **list, int *type)
-{
-	char	*str;
-
-	str = get_word(buf, (*list)->i, (*list)->k);
-	if ((*list)->corrective_token == 0)
-		change_node(*tmp, buf, list);
+	if (tmp->tok != NULL)
+		tmp->len = ft_strlen(tmp->tok);
+	if (quote == '\"')
+		tmp->type = DOUBLE_QUOTES;
 	else
-		*tmp = ft_put_between_token(*tmp, (*tmp)->next, str);
-	free (str);
-	*type = get_type(buf[(*list)->k]);
-	(*list)->i = (*list)->k;
+		tmp->type = SINGLE_QUOTES;
+	printf("%s\n", tmp->tok);
+	tmp->next = *head;
+	*head = tmp;
+	(*words)--;
 }
 
-void	*find_words(char *input, t_token_list **list)
+void	temp_assign(t_token_list **tmp, t_token_list **head, char **splited, int *words)
 {
-	int				start;
-	int				end;
-	int				spaces;
+	*tmp = malloc(sizeof(t_token_list));
+	(*tmp)->tok = ft_strdup(splited[*words]);
+	(*tmp)->len = ft_strlen(splited[*words]);
+	(*tmp)->type = -1;
+	(*tmp)->next = *head;
+	*head = *tmp;
+	(*words)--;
+}
 
-	start = 0;
-	end = 0;
-	while (input[start])
+int	ft_init_list(t_token_list **head, char *input, char **splited)
+{
+	int				words;
+	t_token_list	*temp;
+
+	if (check_closed_brackets(splited) == 1)
 	{
-		while (((input[start] >= 8 && input[start] <= 14) || \
-		input[start] == 32) && input[start] != '\0')
-			start++;
-		spaces = start - end;
-		end = start;
-		while (!(input[start] >= 8 && input[start] <= 14) && \
-		input[end] != ' ' && input[end] != '\0')
-			end++;
-		if (!(*list))
-			*list = delete_spaces(input, start, end, spaces);
-		else if (input[start] != '\0' && input[start] != 32)
-			ft_lstadd_back_minishell(list, \
-			delete_spaces(input, start, end, spaces));
-		start = end;
+		throw_error("brackets not closed\n");
+		return (1);
+	}
+	words = get_words_minishell(input);
+	words -= 1;
+	while (0 <= words)
+	{
+		if (splited[words][0] == '\"' || splited[words][0] == '\'')
+		{
+			cat_quote(splited, &words, head);
+			continue ;
+		}
+		temp_assign(&temp, head, splited, &words);
 	}
 	return (0);
 }
 
-void	split_quotes(t_token_list *tmp)
+void lexer(char *readed)
 {
-	int		len;
-	int		type;
+	// t_token_list	*list;
+	char **splited;
 
-	type = get_type(tmp->tok[0]);
-	len = ft_strlen(tmp->tok);
-	free(tmp->tok);
-	tmp->tok = NULL;
-	tmp->len = 0;
-	tmp->type = type;
-	while(len > 1)
+	splited = ft_split_minishell(readed);
+	if (ft_init_list(&(g_shell_h->head), readed, splited) == 1)
 	{
-		tmp = ft_put_between_token(tmp, tmp->next, NULL);
-		tmp->type = type;
-		len--;
+		free_readed_and_splited(readed, splited);
+		return ;
 	}
-}
-
-
-void	check_repeat_quotes(t_token_list **list)
-{
-	t_token_list	*tmp;
-
-	tmp = *list;
-	while(tmp != NULL)
+	while(g_shell_h->head != NULL)
 	{
-		if (tmp->tok != NULL && (tmp->tok[0] == '\"' || tmp->tok[0] == '\''))
-		{
-			if (tmp->tok[1] == tmp->tok[0])
-				split_quotes(tmp);
-		}
-		tmp = tmp->next;
+		printf("[%s]\n", g_shell_h->head->tok);
+		g_shell_h->head = g_shell_h->head->next;
 	}
-}
-
-t_token_list	*lexer(char *input)
-{
-	t_token_list	*list;
-
-	list = NULL;
-	find_words(input, &list);
-	if (list != NULL)
-	{
-		list->i = 0;
-		list->k = 0;
-		list_value_cmp(&list);
-		get_final_type(&list);
-		check_repeat_quotes(&list);
-	}
-	// check_quotes(list);
-	return(list);
+	// while (array[i])
+	// 	printf("%s\n",array[i++]);
 }

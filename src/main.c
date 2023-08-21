@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/17 20:16:08 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/21 20:12:32 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,31 +22,18 @@ void	init_main(int argc, char **argv, char **env)
 
 int	main(int argc, char **argv, char **env)
 {
-	t_token_list	*list;
-	t_token_list	*tmp;
+	// t_token_list	*list;
+	// t_token_list	*tmp;
 	char			*str;
 
 	init_main(argc, argv, env);
 	while (1)
 	{
-		// list = NULL;
-		str = " asdas;ldals\'\"\"ASD|||\\\"\"\"AS";
-		// str = read_input();
-		// str = "hei\"\'\"\"\"ei\"\'\"\"\" asd| asd|";
-		// if (!str)
-		// 	return (0);
-		// printf("%s\n", find_in_env(str));
-		list = lexer(str);
-		if (list)
-			tmp = list;
-		while(tmp != NULL)
-		{
-			printf("[%d] - [%s] - [%d] \n", tmp->type, tmp->tok, tmp->spaces);
-			tmp = tmp->next;
-		}
-		// parse(list);
-		ft_clear_tokens(&list);
-		//free(str);
+		str = read_input();
+		// str = "sdaskdkasdsakd\"\"";
+		if (!str)
+			return (0);
+		lexer(str);
 	}
-	return (1);
+	return (0);
 }

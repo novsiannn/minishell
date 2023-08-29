@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/21 20:41:50 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:23:23 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	cat_quote(char **splited, int *words, t_token_list **head)
 		tmp->type = DOUBLE_QUOTES;
 	else
 		tmp->type = SINGLE_QUOTES;
-	printf("%s\n", tmp->tok);
 	tmp->next = *head;
 	*head = tmp;
 	(*words)--;

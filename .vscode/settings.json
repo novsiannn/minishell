@@ -9,6 +9,11 @@
 			"cwd": "/Users/nikitos/Desktop/42study/minishell",
 			"binaryPath": "/Users/nikitos/Desktop/42study/minishell/minishell",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/nikitos/Desktop/42study/old_minishell",
+			"binaryPath": "/Users/nikitos/Desktop/42study/old_minishell/minishell",
+			"binaryArgs": []
 		}
 	]
 }

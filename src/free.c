@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:43:43 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/21 19:13:10 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:32:14 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,33 @@ void	free_t_pipe(t_pipe_group **token)
 	*token = NULL;
 }
 
+char	*ft_strjoin_reverse(char const *s1, char const *s2)
+{
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*res;
+
+	if (!s1 && !s2)
+		return (ft_strdup(""));
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	res = (char *) malloc(s1_len + s2_len + 1);
+	if (!res)
+		return (NULL);
+	ft_memmove(res, s2, s1_len);
+	ft_memmove(res + s2_len, s1, s1_len + 1);
+	return (res);
+}
+
 void	strjoin_free(char **str, char *add)
 {
 	char	*res;
 
-	res = ft_strjoin(*str, add);
+	res = ft_strjoin_reverse(*str, add);
 	free(*str);
 	*str = res;
 }

@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/21 20:12:32 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/29 21:23:12 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		str = read_input();
-		// str = "sdaskdkasdsakd\"\"";
+		// str = "sdaskdkasdsakd\"asd\"";
 		if (!str)
 			return (0);
 		lexer(str);

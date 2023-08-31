@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:48:42 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/31 16:11:09 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/31 18:23:51 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*resolve_dollar(char *inp)
 			i += ft_strlen(var_name);
 			j += ft_strlen(var_value);
 			free(var_name);
-			free(var_value);
+			// free(var_value);
 		}
 		else
 		{
@@ -80,7 +80,7 @@ int	define_malloc(int *i, int *j, char *inp)
 			(*i) += ft_strlen(var_name);
 			(*j) += ft_strlen(var_value);
 			free(var_name);
-			free(var_value);
+			// free(var_value);
 		}
 		else
 		{

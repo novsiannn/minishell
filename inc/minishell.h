@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/31 16:10:10 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:48:01 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,11 @@ int					get_words_minishell(char *str);
 int					ft_words_len(char *str);
 int					ft_init_list(t_token_list **head, char *input, char **splited);
 int					ft_strcmp(char *s1, char *s2);
+int					put_skip(t_token_list **tmp);
 
 void				change_node(t_token_list *tmp, \
 char *buf, t_token_list **list);
+void				main_allocate(char *readed);
 void				split_value(t_token_list **tmp, \
 char *buf, t_token_list **list, int *type);
 void				init_vars_env(int	*counter, char ***env, char **envp, int *i);

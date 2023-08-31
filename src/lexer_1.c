@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/31 16:12:04 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/08/31 20:53:45 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int	check_closed_brackets(char **splited)
 	{
 		if (quote)
 		{
-			if (quote == 1 && (ft_strcmp(splited[i],"\'") == 0))
+			if (quote == 1 && (ft_strcmp(splited[i], "\'") == 0))
 				quote = 0;
-			else if (quote == 2 && (ft_strcmp(splited[i],"\"") == 0))
+			else if (quote == 2 && (ft_strcmp(splited[i], "\"") == 0))
 				quote = 0;
 		}
-		else if (ft_strcmp(splited[i],"\'") == 0)
+		else if (ft_strcmp(splited[i], "\'") == 0)
 			quote = 1;
-		else if (ft_strcmp(splited[i],"\"") == 0)
+		else if (ft_strcmp(splited[i], "\"") == 0)
 			quote = 2;
 		i++;
 	}
@@ -60,7 +60,7 @@ void	cat_quote(char **splited, int *words, t_token_list **head)
 	tmp->tok = NULL;
 	quote = splited[*words][0];
 	(*words)--;
-	while(*words >= 0 && splited[*words][0] != quote)
+	while (*words >= 0 && splited[*words][0] != quote)
 	{
 		strjoin_free(&(tmp->tok), splited[*words]);
 		(*words)--;
@@ -71,12 +71,15 @@ void	cat_quote(char **splited, int *words, t_token_list **head)
 		tmp->type = DOUBLE_QUOTES;
 	else
 		tmp->type = SINGLE_QUOTES;
+	if (tmp->tok == NULL)
+		strjoin_free(&(tmp->tok), "\0");
 	tmp->next = *head;
 	*head = tmp;
 	(*words)--;
 }
 
-void	temp_assign(t_token_list **tmp, t_token_list **head, char **splited, int *words)
+void	temp_assign(t_token_list **tmp, t_token_list **head, \
+char **splited, int *words)
 {
 	*tmp = malloc(sizeof(t_token_list));
 	(*tmp)->tok = ft_strdup(splited[*words]);
@@ -111,7 +114,36 @@ int	ft_init_list(t_token_list **head, char *input, char **splited)
 	return (0);
 }
 
-void lexer(char *readed)
+int	put_skip(t_token_list **tmp)
+{
+	if ((*tmp)->type != -1)
+	{
+		*tmp = (*tmp)->next;
+		return (1);
+	}
+	return (0);
+}
+
+void	put_type_tok(t_token_list **head)
+{
+	t_token_list	*tmp;
+
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		if (put_skip(&tmp))
+			continue ;
+		// if ()
+		tmp = tmp->next;
+	}
+}
+
+void	ft_lexer(void)
+{
+	put_type_tok(&(g_shell_h->head));
+}
+
+void	main_allocate(char *readed)
 {
 	// t_token_list	*list;
 	char **splited;
@@ -122,12 +154,11 @@ void lexer(char *readed)
 		free_readed_and_splited(readed, splited);
 		return ;
 	}
+	// ft_lexer();
 	expander();
 	while(g_shell_h->head != NULL)
 	{
 		printf("[%s]\n", g_shell_h->head->tok);
 		g_shell_h->head = g_shell_h->head->next;
 	}
-	// while (array[i])
-	// 	printf("%s\n",array[i++]);
 }

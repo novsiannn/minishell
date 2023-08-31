@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:43:43 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/29 21:32:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/31 18:14:08 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,11 +76,31 @@ void	free_t_pipe(t_pipe_group **token)
 	*token = NULL;
 }
 
-char	*ft_strjoin_reverse(char const *s1, char const *s2)
+char	*ft_strjoin_allocate(int len1, int len2, char const *s1, char const *s2)
 {
-	size_t	s1_len;
-	size_t	s2_len;
-	char	*res;
+	int		i;
+	int		j;
+	char	*dst;
+
+	i = 0;
+	j = 0;
+	dst = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
+	if (!dst)
+		return (NULL);
+	while (i < len2)
+		dst[j++] = s2[i++];
+	i = 0;
+	while (i < len1)
+		dst[j++] = s1[i++];
+	dst[j] = '\0';
+	return (dst);
+}
+
+char	*ft_strjoin_minishell(char const *s1, char const *s2)
+{
+	char	*dst;
+	size_t	len1;
+	size_t	len2;
 
 	if (!s1 && !s2)
 		return (ft_strdup(""));
@@ -88,21 +108,17 @@ char	*ft_strjoin_reverse(char const *s1, char const *s2)
 		return (ft_strdup(s2));
 	else if (!s2)
 		return (ft_strdup(s1));
-	s1_len = ft_strlen(s1);
-	s2_len = ft_strlen(s2);
-	res = (char *) malloc(s1_len + s2_len + 1);
-	if (!res)
-		return (NULL);
-	ft_memmove(res, s2, s1_len);
-	ft_memmove(res + s2_len, s1, s1_len + 1);
-	return (res);
+	len1 = ft_strlen(s1);
+	len2 = ft_strlen(s2);
+	dst = ft_strjoin_allocate(len1, len2, s1, s2);
+	return (dst);
 }
 
 void	strjoin_free(char **str, char *add)
 {
 	char	*res;
 
-	res = ft_strjoin_reverse(*str, add);
+	res = ft_strjoin_minishell(*str, add);
 	free(*str);
 	*str = res;
 }

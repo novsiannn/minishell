@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/21 19:12:58 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:10:10 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,4 +116,9 @@ t_token_list		*create_token(int length, char *start, int type);
 t_token_list		*ft_lstlast_minishell(t_token_list *lst);
 
 t_pipe_group		*create_pipe_group(t_token_list *start, t_token_list *finish);
+
+void	expander(void);
+char	*resolve_dollar(char *inp);
+int		define_malloc(int *i, int *j, char *inp);
+char	*get_var_name(char *inp);
 #endif

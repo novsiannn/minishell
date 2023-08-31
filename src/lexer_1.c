@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/29 21:23:23 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/08/31 16:12:04 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	cat_quote(char **splited, int *words, t_token_list **head)
 	char			quote;
 
 	tmp = malloc(sizeof(t_token_list));
-	tmp->tok = NULL; 
+	tmp->tok = NULL;
 	quote = splited[*words][0];
 	(*words)--;
 	while(*words >= 0 && splited[*words][0] != quote)
@@ -122,6 +122,7 @@ void lexer(char *readed)
 		free_readed_and_splited(readed, splited);
 		return ;
 	}
+	expander();
 	while(g_shell_h->head != NULL)
 	{
 		printf("[%s]\n", g_shell_h->head->tok);

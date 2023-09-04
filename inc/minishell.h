@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/31 20:48:01 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/04 18:46:09 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 
 # define WORD 0
 # define PIPE 1 // |
-# define SPAC 2 // ' '
+# define SPACE 2 // ' '
 # define GREATER_THAN 3 // >
 # define LESS_THAN 4 // <
 # define DOUBLE_QUOTES 5 // "
@@ -68,11 +68,9 @@ typedef struct s_minishell
 t_minishell *g_shell_h;
 
 char				*read_input(void);
-char				*get_word(char *str, int start, int end);
 char				*find_in_env(char *str);
 char				**ft_split_minishell(char *input);
 
-int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 int					throw_error(char *error);
 int					get_type(char symbol);
 int					assign_env(char **envp);
@@ -81,15 +79,11 @@ int					ft_words_len(char *str);
 int					ft_init_list(t_token_list **head, char *input, char **splited);
 int					ft_strcmp(char *s1, char *s2);
 int					put_skip(t_token_list **tmp);
+int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 
-void				change_node(t_token_list *tmp, \
-char *buf, t_token_list **list);
 void				main_allocate(char *readed);
-void				split_value(t_token_list **tmp, \
-char *buf, t_token_list **list, int *type);
+void				split_words(t_token_list **list);
 void				init_vars_env(int	*counter, char ***env, char **envp, int *i);
-void				last_letter(t_token_list *list, \
-char *buf, int sta, int end);
 void				print_env(void);
 void				fill_array(char **array, char *str);
 void				strjoin_free(char **str, char *add);
@@ -104,20 +98,16 @@ t_token_list *new);
 void				get_final_type(t_token_list **token);
 char				*quotes_allocate(char *str);
 void				check_quotes(t_token_list *tokens);
-void				*find_words(char *input, t_token_list **list);
-void				list_value_cmp(t_token_list **list);
-void				list_value_split(t_token_list **list, int type);
+
+
+
 void				pipe_grp_mmry(t_pipe_group **pipe_grp, t_token_list *start, t_token_list *finish);
 void				parse(t_token_list *list);
 
-t_token_list		*ft_put_between_token(t_token_list *prev, \
-t_token_list*next, char *value);
-void		lexer(char *input);
-t_token_list		*delete_spaces(char *str, int start, int end);
-t_token_list		*create_token(int length, char *start, int type);
-t_token_list		*ft_lstlast_minishell(t_token_list *lst);
+void				lexer(char *input);
 
 t_pipe_group		*create_pipe_group(t_token_list *start, t_token_list *finish);
+t_token_list		*new_token_and_type(int *i, char *str);
 
 void	expander(void);
 char	*resolve_dollar(char *inp);

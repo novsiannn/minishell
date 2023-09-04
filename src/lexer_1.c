@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/31 20:53:45 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:53:08 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,22 @@ void	put_type_tok(t_token_list **head)
 	{
 		if (put_skip(&tmp))
 			continue ;
-		// if ()
+		if (tmp->tok[0] == '|' && !(tmp->tok[1]))
+			tmp->type = PIPE;
+		else if (tmp->tok[0] == '>' && tmp->tok[1] \
+		&& tmp->tok[1] == '>' && !(tmp->tok[2]))
+			tmp->type = APPEND;
+		else if (tmp->tok[0] == '<' && tmp->tok[1] \
+		&& tmp->tok[1] == '<' && !(tmp->tok[2]))
+			tmp->type = HEREDOCK;
+		else if (tmp->tok[0] == '>' && !(tmp->tok[1]))
+			tmp->type = GREATER_THAN;
+		else if (tmp->tok[0] == '<' && !(tmp->tok[1]))
+			tmp->type = LESS_THAN;
+		else if (tmp->tok[0] != ' ')
+			tmp->type = WORD;
+		else
+			tmp->type = SPACE;
 		tmp = tmp->next;
 	}
 }
@@ -141,6 +156,7 @@ void	put_type_tok(t_token_list **head)
 void	ft_lexer(void)
 {
 	put_type_tok(&(g_shell_h->head));
+	split_words(&(g_shell_h->head));
 }
 
 void	main_allocate(char *readed)
@@ -154,11 +170,11 @@ void	main_allocate(char *readed)
 		free_readed_and_splited(readed, splited);
 		return ;
 	}
-	// ft_lexer();
+	ft_lexer();
 	expander();
 	while(g_shell_h->head != NULL)
 	{
-		printf("[%s]\n", g_shell_h->head->tok);
+		printf("string - [%s] and type = [%d]\n", g_shell_h->head->tok, g_shell_h->head->type);
 		g_shell_h->head = g_shell_h->head->next;
 	}
 }

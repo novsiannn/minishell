@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+         #
+#    By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/26 18:59:58 by nikitos           #+#    #+#              #
-#    Updated: 2023/08/31 16:10:27 by ikhristi         ###   ########.fr        #
+#    Updated: 2023/08/31 21:45:47 by nikitos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFT = libft
 
-SRCS = src/env.c src/main.c src/free.c src/lexer_1.c src/lexer_2.c src/array_reading.c src/clear.c src/read_input.c src/pipe_group.c src/lexer_utils.c src/token.c src/pars.c src/pars_utils.c
+SRCS = src/env.c src/main.c src/free.c src/lexer_1.c src/lexer_2.c src/lexer_3.c src/array_reading.c src/clear.c src/read_input.c src/pipe_group.c src/lexer_utils.c src/token.c src/pars.c src/pars_utils.c
 OBJS = ${SRCS:.c=.o}
 
 RM = rm -f

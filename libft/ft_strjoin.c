@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:50 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/31 18:01:20 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/04 20:17:32 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,26 +14,22 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	char	*dst;
-	size_t	i;
-	size_t	j;
-	size_t	len1;
-	size_t	len2;
+	size_t	s1_len;
+	size_t	s2_len;
+	char	*res;
 
-	if (!s1 || !s2)
+	if (!s1 && !s2)
+		return (ft_strdup(""));
+	else if (!s1)
+		return (ft_strdup(s2));
+	else if (!s2)
+		return (ft_strdup(s1));
+	s1_len = ft_strlen(s1);
+	s2_len = ft_strlen(s2);
+	res = (char *) malloc(s1_len + s2_len + 1);
+	if (!res)
 		return (NULL);
-	i = 0;
-	j = 0;
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	dst = (char *)malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!dst)
-		return (NULL);
-	while (i < len1)
-		dst[j++] = s1[i++];
-	i = 0;
-	while (i < len2)
-		dst[j++] = s2[i++];
-	dst[j] = '\0';
-	return (dst);
+	ft_memmove(res, s1, s1_len);
+	ft_memmove(res + s1_len, s2, s2_len + 1);
+	return (res);
 }

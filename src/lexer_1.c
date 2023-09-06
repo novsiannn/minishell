@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/09/04 20:53:08 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/06 17:05:44 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,10 +153,23 @@ void	put_type_tok(t_token_list **head)
 	}
 }
 
+void	delete_empty_node(t_token_list **list)
+{
+	t_token_list	*tmp;
+
+	tmp = *list;
+	while (tmp != NULL)
+	{
+		printf("%s\n", tmp->tok);
+		tmp = tmp->next;
+	}
+}
+
 void	ft_lexer(void)
 {
 	put_type_tok(&(g_shell_h->head));
 	split_words(&(g_shell_h->head));
+	// delete_empty_node(&(g_shell_h->head));
 }
 
 void	main_allocate(char *readed)
@@ -172,9 +185,11 @@ void	main_allocate(char *readed)
 	}
 	ft_lexer();
 	expander();
-	while(g_shell_h->head != NULL)
-	{
-		printf("string - [%s] and type = [%d]\n", g_shell_h->head->tok, g_shell_h->head->type);
-		g_shell_h->head = g_shell_h->head->next;
-	}
+	// while(g_shell_h->head != NULL)
+	// {
+	// 	printf("string - [%s] and type = [%d]\n", g_shell_h->head->tok, g_shell_h->head->type);
+	// 	g_shell_h->head = g_shell_h->head->next;
+	// }
+	// free_readed_and_splited(readed, splited);
+	free_t_token(&(g_shell_h->head));
 }

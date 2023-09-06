@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/04 18:16:56 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/06 18:23:31 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	init_main(int argc, char **argv, char **env)
 	(void) argc;
 	(void) argv;
 	assign_env(env);
-	//signals
+	signals();
 }
 
 int	main(int argc, char **argv, char **env)

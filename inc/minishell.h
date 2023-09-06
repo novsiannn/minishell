@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/04 18:46:09 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/06 18:26:07 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <unistd.h>
+# include <signal.h>
 
 # define WORD 0
 # define PIPE 1 // |
@@ -65,7 +66,7 @@ typedef struct s_minishell
 	t_token_list	*head;
 }			t_minishell;
 
-t_minishell *g_shell_h;
+extern t_minishell *g_shell_h;
 
 char				*read_input(void);
 char				*find_in_env(char *str);
@@ -82,6 +83,7 @@ int					put_skip(t_token_list **tmp);
 int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 
 void				main_allocate(char *readed);
+void				free_t_token(t_token_list **list);
 void				split_words(t_token_list **list);
 void				init_vars_env(int	*counter, char ***env, char **envp, int *i);
 void				print_env(void);
@@ -113,4 +115,6 @@ void	expander(void);
 char	*resolve_dollar(char *inp);
 int		define_malloc(int *i, int *j, char *inp);
 char	*get_var_name(char *inp);
+void    signals(void);
+void 	sig_handler(int sig);
 #endif

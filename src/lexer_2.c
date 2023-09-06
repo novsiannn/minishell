@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:48:42 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/31 18:23:51 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/06 17:01:26 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ char	*resolve_dollar(char *inp)
 			i += ft_strlen(var_name);
 			j += ft_strlen(var_value);
 			free(var_name);
-			// free(var_value);
 		}
 		else
 		{
@@ -61,6 +60,7 @@ char	*resolve_dollar(char *inp)
 			i++;
 		}
 	}
+	res[j] = '\0';
 	return (res);
 }
 
@@ -80,7 +80,6 @@ int	define_malloc(int *i, int *j, char *inp)
 			(*i) += ft_strlen(var_name);
 			(*j) += ft_strlen(var_value);
 			free(var_name);
-			// free(var_value);
 		}
 		else
 		{

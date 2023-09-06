@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:54:03 by nikitos           #+#    #+#             */
-/*   Updated: 2023/08/21 19:52:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/06 19:07:09 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	*words_allocate(char *str)
 	return (words);
 }
 
-void	fill_array_end(char **array, char **str, int *word_index)
+void fill_array_end(char **array, char **str, int *word_index)
 {
 	array[*word_index] = words_allocate(*str);
 	(*word_index)++;

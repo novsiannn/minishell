@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:48:42 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/06 17:01:26 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/06 19:24:53 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ void	expander(void)
 			buf = resolve_dollar(tmp->tok);
 			free(tmp->tok);
 			tmp->tok = buf;
-			free(buf);
+			buf = NULL;
+			//free(buf);
 		}
 		tmp = tmp->next;
 	}

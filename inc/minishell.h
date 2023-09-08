@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/06 18:26:07 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/08 16:34:12 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 # define HEREDOCK 7 // <<
 # define APPEND 8 // >>
 # define EXPANSION 9
+
+# define SYNTAX_ERROR "minishell: syntax error near unexpected token\n"
+# define OPEN_ERROR "minishell: couldn't open such file or directory\n"
 
 typedef struct s_token_list
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:34:13 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/08 17:02:38 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:00:02 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ t_pipe_group	*init_pipe(int index)
 	pipe->argv = malloc(sizeof(char *) * 100);
 	while (i < 100)
 	{
-		pipe->argc[i] = NULL;
+		pipe->argv[i] = NULL;
 		i++;
 	}
 	pipe->cmd = NULL;
@@ -34,12 +34,12 @@ t_pipe_group	*init_pipe(int index)
 	return (pipe);
 }
 
-void	skip_space(t_token **token)
+void	skip_space(t_token_list **tmp)
 {
-	*token = (*token)->next;
-	while ((*token) && ((*token)->type == SPACE
-			|| ((*token)->type == WORD && !((*token)->info))))
-		tmp = tmp->next;
+	*tmp = (*tmp)->next;
+	while ((*tmp) && ((*tmp)->type == SPACE
+			|| ((*tmp)->type == WORD && !((*tmp)->tok))))
+		tmp = (*tmp)->next;
 }
 
 char	*charjoinfree(char **str, char ch)

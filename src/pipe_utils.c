@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:34:13 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/08 20:00:02 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:49:32 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,25 +39,19 @@ void	skip_space(t_token_list **tmp)
 	*tmp = (*tmp)->next;
 	while ((*tmp) && ((*tmp)->type == SPACE
 			|| ((*tmp)->type == WORD && !((*tmp)->tok))))
-		tmp = (*tmp)->next;
+		*tmp = (*tmp)->next;
 }
 
-char	*charjoinfree(char **str, char ch)
+void	charjoinfree(char **str, char ch)
 {
-	int		i;
-	char	*res;
+	char *adder;
+	char *new;
 
-	i = 0;
-	res = malloc((size_t)ft_strlen(str) + 2);
-	if (!res)
-		return (NULL);
-	while (str[i] != '\0')
-	{
-		res[i] = str[i];
-		i++;
-	}
-	res[i++] = ch;
-	res[i] = '\0';
-	free(str);
-	return (res);
+	adder = malloc(2);
+	adder[0] = ch;
+	adder[1] = '\0';
+	new = ft_strjoin(*str, adder);
+	free (*str);
+	free (adder);
+	*str = new;	
 }

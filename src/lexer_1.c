@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/09/06 19:27:29 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/09 16:55:36 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,35 +124,6 @@ int	put_skip(t_token_list **tmp)
 	return (0);
 }
 
-void	put_type_tok(t_token_list **head)
-{
-	t_token_list	*tmp;
-
-	tmp = *head;
-	while (tmp != NULL)
-	{
-		if (put_skip(&tmp))
-			continue ;
-		if (tmp->tok[0] == '|' && !(tmp->tok[1]))
-			tmp->type = PIPE;
-		else if (tmp->tok[0] == '>' && tmp->tok[1] \
-		&& tmp->tok[1] == '>' && !(tmp->tok[2]))
-			tmp->type = APPEND;
-		else if (tmp->tok[0] == '<' && tmp->tok[1] \
-		&& tmp->tok[1] == '<' && !(tmp->tok[2]))
-			tmp->type = HEREDOCK;
-		else if (tmp->tok[0] == '>' && !(tmp->tok[1]))
-			tmp->type = GREATER_THAN;
-		else if (tmp->tok[0] == '<' && !(tmp->tok[1]))
-			tmp->type = LESS_THAN;
-		else if (tmp->tok[0] != ' ')
-			tmp->type = WORD;
-		else
-			tmp->type = SPACE;
-		tmp = tmp->next;
-	}
-}
-
 void	delete_empty_node(t_token_list **list)
 {
 	t_token_list	*tmp;
@@ -163,13 +134,6 @@ void	delete_empty_node(t_token_list **list)
 		printf("%s\n", tmp->tok);
 		tmp = tmp->next;
 	}
-}
-
-void	ft_lexer(void)
-{
-	put_type_tok(&(g_shell_h->head));
-	split_words(&(g_shell_h->head));
-	// delete_empty_node(&(g_shell_h->head));
 }
 
 void	main_allocate(char *readed)
@@ -185,6 +149,7 @@ void	main_allocate(char *readed)
 	}
 	ft_lexer();
 	expander();
+	redirection();
 	// while(g_shell_h->head != NULL)
 	// {
 	// 	printf("string - [%s] and type = [%d]\n", g_shell_h->head->tok, g_shell_h->head->type);

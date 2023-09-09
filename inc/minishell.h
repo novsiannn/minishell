@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/08 20:48:23 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/09 17:19:32 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,12 @@ extern t_minishell *g_shell_h;
 char				*read_input(void);
 char				*find_in_env(char *str);
 char				**ft_split_minishell(char *input);
+void				charjoinfree(char **str, char ch);
 
 int					throw_error(char *error);
 int					get_type(char symbol);
+int					create_red(t_token_list **token_tmp,
+					t_pipe_group **tmp);
 int					assign_env(char **envp);
 int					get_words_minishell(char *str);
 int					ft_words_len(char *str);
@@ -85,8 +88,12 @@ int					ft_init_list(t_token_list **head, char *input, char **splited);
 int					ft_strcmp(char *s1, char *s2);
 int					put_skip(t_token_list **tmp);
 int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
+int					here_doc(t_token_list **token_tmp, t_pipe_group **tmp);
+int					open_output(t_pipe_group **tmp, t_token_list **token_tmp, int type);
 
 void				main_allocate(char *readed);
+void				ft_lexer(void);
+void				put_type_tok(t_token_list **head);
 void				free_t_token(t_token_list **list);
 void				split_words(t_token_list **list);
 void				init_vars_env(int	*counter, char ***env, char **envp, int *i);
@@ -94,7 +101,9 @@ void				print_env(void);
 void				fill_array(char **array, char *str);
 void				strjoin_free(char **str, char *add);
 
+t_pipe_group		*redirection(void);
 void				ft_clear_tokens(t_token_list **tokens);
+void				skip_space(t_token_list **tmp);
 void				free_t_pipe(t_pipe_group **token);
 void				free_t_token(t_token_list **token);
 void				free_splited(char **splited);
@@ -103,7 +112,11 @@ void				ft_lstadd_back_minishell(t_token_list **lst, \
 t_token_list *new);
 void				get_final_type(t_token_list **token);
 char				*quotes_allocate(char *str);
+char				*here_doc_init(char **file_name, t_token_list **token_tmp,
+						t_pipe_group **tmp, int *file);
 void				check_quotes(t_token_list *tokens);
+void				heredoc_last(t_token_list **token_tmp,
+				t_pipe_group **tmp, char **file_name, char **buf);
 
 
 
@@ -113,6 +126,8 @@ void				parse(t_token_list *list);
 void				lexer(char *input);
 
 t_pipe_group		*create_pipe_group(t_token_list *start, t_token_list *finish);
+t_pipe_group		*init_pipe(int index);
+t_pipe_group		*init_pipe(int index);
 t_token_list		*new_token_and_type(int *i, char *str);
 
 void	expander(void);

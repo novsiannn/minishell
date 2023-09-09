@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 21:44:01 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/06 14:44:41 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:55:55 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,35 @@ void	split_words(t_token_list **list)
 			find_tokens(&tmp);
 			continue ;
 		}
+		tmp = tmp->next;
+	}
+}
+
+void	put_type_tok(t_token_list **head)
+{
+	t_token_list	*tmp;
+
+	tmp = *head;
+	while (tmp != NULL)
+	{
+		if (put_skip(&tmp))
+			continue ;
+		if (tmp->tok[0] == '|' && !(tmp->tok[1]))
+			tmp->type = PIPE;
+		else if (tmp->tok[0] == '>' && tmp->tok[1] \
+		&& tmp->tok[1] == '>' && !(tmp->tok[2]))
+			tmp->type = APPEND;
+		else if (tmp->tok[0] == '<' && tmp->tok[1] \
+		&& tmp->tok[1] == '<' && !(tmp->tok[2]))
+			tmp->type = HEREDOCK;
+		else if (tmp->tok[0] == '>' && !(tmp->tok[1]))
+			tmp->type = GREATER_THAN;
+		else if (tmp->tok[0] == '<' && !(tmp->tok[1]))
+			tmp->type = LESS_THAN;
+		else if (tmp->tok[0] != ' ')
+			tmp->type = WORD;
+		else
+			tmp->type = SPACE;
 		tmp = tmp->next;
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/09 17:19:32 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/10 22:15:25 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ int					throw_error(char *error);
 int					get_type(char symbol);
 int					create_red(t_token_list **token_tmp,
 					t_pipe_group **tmp);
+int					add_word(t_pipe_group **tmp, t_token_list **token_tmp,
+					int *first, int *count_words);
+int 				add_pipe(t_pipe_group **tmp, t_token_list **token_tmp,
+					int *first, int *count_words);										
 int					assign_env(char **envp);
 int					get_words_minishell(char *str);
 int					ft_words_len(char *str);

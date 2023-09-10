@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:47:07 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/09 17:18:22 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/10 22:06:42 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,40 @@ int	create_red(t_token_list **token_tmp,
 	return (0);
 }
 
+int	add_word(t_pipe_group **tmp, t_token_list **token_tmp,
+					int *first, int *count_words)
+{
+	if (!((*token_tmp)->tok))
+	{
+		*token_tmp = (*token_tmp)->next;
+		return (1);
+	}
+	(*tmp)->argv[*count_words] = ft_strdup((*token_tmp)->tok);
+	if (!(*first))
+	{
+		(*tmp)->cmd = (*tmp)->argv[*count_words];
+		*first = 1;
+	}
+	(*count_words)++;
+	*token_tmp = (*token_tmp)->next;
+	return (0);
+}
+
+int add_pipe(t_pipe_group **tmp, t_token_list **token_tmp,
+			int *first, int *count_words)
+{
+	if (!(*first))
+		return (1);
+	(*tmp)->argv[*count_words] = NULL;
+	*count_words = 0;
+	*first = (*tmp)->pipe_index;
+	*token_tmp = (*token_tmp)->next;
+	(*tmp)->next = init_pipe(*first + 1);
+	*tmp = (*tmp)->next;
+	*first = 0;
+	return (0);
+}
+
 int	redirection_loop(t_pipe_group **tmp, t_token_list **tok,
 					int *first, int *count_words)
 {
@@ -52,15 +86,17 @@ int	redirection_loop(t_pipe_group **tmp, t_token_list **tok,
 			if (g_shell_h->pipes == NULL)
 				return (1);
 		}
-		// else if ((*tok)->type == SINGLE_QUOTES
-		// 	|| (*tok)->type == DOUBLE_QUOTES || (*tok)->type == WORD)
-		// {
-		// 	//
-		// }
-		// else if ((*tok)->type == PIPE)
-		// {
-		// 	//
-		// }
+		else if ((*tok)->type == SINGLE_QUOTES
+			|| (*tok)->type == DOUBLE_QUOTES || (*tok)->type == WORD)
+		{
+			if (add_word(tmp, tok, first, count_words))
+				continue;
+		}
+		else if ((*tok)->type == PIPE)
+		{
+			if (add_pipe(tmp, tok, first, count_words))
+				return (throw_error(SYNTAX_ERROR));
+		}
 		else
 			*tok = (*tok)->next;
 	}

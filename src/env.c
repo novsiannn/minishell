@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:55:57 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/08/11 21:08:12 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/14 18:06:24 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,18 @@ char	*find_in_env(char *str)
 		i++;
 	}
 	return ("\0");
+}
+
+int	find_path_env(char **env, char *key)
+{
+	int	i;
+
+	i = 0;
+	while (i < 1000)
+	{
+		if (env[i] && ft_strnstr(env[i], key, ft_strlen(key)))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

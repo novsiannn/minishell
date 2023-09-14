@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:47:07 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/10 22:06:42 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:14:42 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,7 @@ int	redirection_loop(t_pipe_group **tmp, t_token_list **tok,
 		else
 			*tok = (*tok)->next;
 	}
-	printf("%d\n", *first);
-	printf("%d\n", *count_words);
-	return (0); // zahodit
+	return (0);
 }
 
 t_pipe_group	*redirection(void)
@@ -118,6 +116,13 @@ t_pipe_group	*redirection(void)
 	g_shell_h->pipes = init_pipe(0);
 	tmp = g_shell_h->pipes;
 	token_tmp = g_shell_h->head;
-	redirection_loop(&tmp, &token_tmp, &i, &count_words);
-	return (tmp); // пока просто для компиляции, потом убрать
+	if (redirection_loop(&tmp, &token_tmp, &i, &count_words))
+		return (NULL);
+	if (!i)
+	{
+		throw_error("minishell: syntax error near unexpected token\n");
+		return (NULL);
+	}
+	tmp->argv[count_words] = NULL;
+	return (g_shell_h->pipes);
 }

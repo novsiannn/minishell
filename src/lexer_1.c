@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 16:23:45 by novsiann          #+#    #+#             */
-/*   Updated: 2023/09/09 16:55:36 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/14 14:47:06 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int	ft_init_list(t_token_list **head, char *input, char **splited)
 
 int	put_skip(t_token_list **tmp)
 {
-	if ((*tmp)->type != -1)
+	if ((*tmp)->type && (*tmp)->type != -1)
 	{
 		*tmp = (*tmp)->next;
 		return (1);
@@ -136,25 +136,29 @@ void	delete_empty_node(t_token_list **list)
 	}
 }
 
-void	main_allocate(char *readed)
-{
-	// t_token_list	*list;
-	char **splited;
-
-	splited = ft_split_minishell(readed);
+int	main_allocate(char **splited, char *readed)
+{	
 	if (ft_init_list(&(g_shell_h->head), readed, splited) == 1)
 	{
 		free_readed_and_splited(readed, splited);
-		return ;
+		return (1);
 	}
 	ft_lexer();
 	expander();
-	redirection();
-	// while(g_shell_h->head != NULL)
-	// {
-	// 	printf("string - [%s] and type = [%d]\n", g_shell_h->head->tok, g_shell_h->head->type);
-	// 	g_shell_h->head = g_shell_h->head->next;
-	// }
-	// free_readed_and_splited(readed, splited);
-	free_t_token(&(g_shell_h->head));
+	g_shell_h->pipes = redirection();
+	if (g_shell_h->pipes == NULL)
+	{
+		free_readed_and_splited(readed, splited);
+		return (1);
+	}
+	return (0);
 }
+	// int i = 0;
+	// while (g_shell_h->pipes)
+	// {
+	// 	i = 0;
+	// 	while(g_shell_h->pipes->argv[i])
+	// 		printf("[%s] ", g_shell_h->pipes->argv[i++]);
+	// 	printf("\n");
+	// 	g_shell_h->pipes = g_shell_h->pipes->next;
+	// }

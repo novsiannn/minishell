@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/09 16:52:10 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/14 15:04:13 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,27 +22,48 @@ void	init_main(int argc, char **argv, char **env)
 	signals();
 }
 
+void	count_last(t_pipe_group *pipes)
+{
+	g_shell_h->last = -1;
+	while (pipes)
+	{
+		pipes = pipes->next;
+		g_shell_h->last++;
+	}
+}
+
 void	ft_lexer(void)
 {
 	put_type_tok(&(g_shell_h->head));
 	split_words(&(g_shell_h->head));
-	// delete_empty_node(&(g_shell_h->head));
+}
+
+void	free_all(char *readed, char **splited)
+{
+	free_t_token(&(g_shell_h->head));
+	free_t_pipe(&(g_shell_h->pipes));
+	free(readed);
+	free_splited(splited);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-	// t_token_list	*list;
-	// t_token_list	*tmp;
-	char			*str;
+	char			*readed;
+	char			**splited;
 
 	init_main(argc, argv, env);
 	while (1)
 	{
-		str = read_input();
-		// str = "sas | ad \"asdf\"";
-		if (!str)
+		readed = read_input();
+		// readed = "helo man | kak dela";
+		if (!readed)
 			return (0);
-		main_allocate(str);
+		splited = ft_split_minishell(readed);
+		if (main_allocate(splited, readed) == 1)
+			continue;
+		count_last(g_shell_h->pipes);
+		executor(g_shell_h->pipes);
+		free_all(readed, splited);
 	}
 	return (0);
 }

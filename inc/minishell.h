@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/10 22:15:25 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/14 14:46:55 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 int					here_doc(t_token_list **token_tmp, t_pipe_group **tmp);
 int					open_output(t_pipe_group **tmp, t_token_list **token_tmp, int type);
 
-void				main_allocate(char *readed);
+int					main_allocate(char **splited, char *readed);
 void				ft_lexer(void);
 void				put_type_tok(t_token_list **head);
 void				free_t_token(t_token_list **list);
@@ -111,6 +111,7 @@ void				skip_space(t_token_list **tmp);
 void				free_t_pipe(t_pipe_group **token);
 void				free_t_token(t_token_list **token);
 void				free_splited(char **splited);
+// void				free_readed_and_splited(char **splited);
 void				free_readed_and_splited(char *readed, char **splited);
 void				ft_lstadd_back_minishell(t_token_list **lst, \
 t_token_list *new);

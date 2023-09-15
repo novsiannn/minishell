@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:02:26 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 14:55:29 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/15 16:47:30 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,6 @@ int	command_cd(char *arg)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		free(key);
 	}
-	printf("%s\n", arg);
-	printf("%d\n", i);
 	return (1);
 }
 

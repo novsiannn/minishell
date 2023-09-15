@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:34:13 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/09 16:49:32 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:44:36 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,14 @@ void	charjoinfree(char **str, char ch)
 	free (*str);
 	free (adder);
 	*str = new;	
+}
+
+int	get_arr_len(char **arr)
+{
+	int	i;
+
+	i = 0;
+	while(arr[i])
+		i++;
+	return (i);
 }

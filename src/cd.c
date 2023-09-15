@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:02:26 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 16:47:30 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:48:58 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,26 @@ void	set_new(char *arg)
 	free(str);
 }
 
+int  check_arg(char *str)
+{
+	if (change_dir(str) == -1)
+	{
+		ft_putstr_fd("cd: no such file or directory: ", 2);
+		ft_putstr_fd(str, 2);
+		ft_putstr_fd("\n", 2);
+		return (1);
+	}
+	return (0);
+}
+
 int	command_cd(char *arg)
 {
 	int		i;
+	int		res;
 	char	*key;
 
 	i = 0;
+	res = 0;
 	if (!arg)
 	{
 		i = find_path_env(g_shell_h->envp, "HOME");
@@ -48,7 +62,9 @@ int	command_cd(char *arg)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		free(key);
 	}
-	return (1);
+	else
+		res = check_arg(arg);
+	return (0);
 }
 
 int	change_dir(char *arg)

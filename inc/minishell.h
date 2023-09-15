@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 14:38:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:46:49 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,20 @@ char				*find_in_env(char *str);
 char				**ft_split_minishell(char *input);
 void				charjoinfree(char **str, char ch);
 void				set_new(char *arg);
+void				free_shell_h(void);
 void				print_export(void);
 
 int					throw_error(char *error);
+int					get_arr_len(char **arr);
 int					check_keyword(char *args);
 int					command_cd(char *arg);
 int					find_index_of_char(char *arg, char c);
 int					change_dir(char *arg);
 int					executor(t_pipe_group *data);
 int					get_type(char symbol);
+int					b_export(char **args);
 int					find_path_env(char **env, char *key);
+int					b_unset(char **args);
 int					create_red(t_token_list **token_tmp,
 					t_pipe_group **tmp);
 int					add_word(t_pipe_group **tmp, t_token_list **token_tmp,

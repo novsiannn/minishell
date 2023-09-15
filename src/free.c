@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:43:43 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/06 18:48:44 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/15 19:45:29 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,23 @@ void	free_argv(char **argv)
 		i++;
 	}
 	free(argv);
+}
+
+void	free_shell_h(void)
+{
+	int	i;
+
+	i = 0;
+	free_t_pipe(&(g_shell_h->pipes));
+	free_t_token(&(g_shell_h->head));
+	while (i < g_shell_h->current_env)
+	{
+		free(g_shell_h->envp[i]);
+		i++;
+	}
+	free(g_shell_h->envp);
+	free(g_shell_h);
+	clear_history();
 }
 
 void	free_t_pipe(t_pipe_group **token)

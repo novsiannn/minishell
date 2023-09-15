@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 16:07:17 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/14 18:16:07 by ikhristi         ###   ########.fr       */
+/*   Created: 2023/09/15 14:32:33 by nikitos           #+#    #+#             */
+/*   Updated: 2023/09/15 14:34:25 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,23 +50,6 @@ int	find_index_of_char(char *arg, char c)
 	while (arg[i] != c)
 		i++;
 	return (i);
-}
-
-void	set_new(char *arg)
-{
-	char	*st;
-	int		j;
-
-	st = ft_substr(arg, 0, find_index_of_char(arg, '=') + 1);
-    j = find_path_env(g_shell_h->envp, st);
-    if (j != -1)
-    {
-        free(g_shell_h->envp[j]);
-        g_shell_h->envp[j] = arg;
-    }
-    else
-        g_shell_h->envp[(g_shell_h->current_env)++] = arg;
-	free(st);
 }
 
 void	print_export(void)

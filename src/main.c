@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/14 15:04:13 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/14 18:26:31 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ int	main(int argc, char **argv, char **env)
 			continue;
 		count_last(g_shell_h->pipes);
 		executor(g_shell_h->pipes);
+		printf("%s\n",g_shell_h->envp[16]);
 		free_all(readed, splited);
 	}
+	
 	return (0);
 }

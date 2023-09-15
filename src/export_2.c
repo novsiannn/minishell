@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/14 18:17:55 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/14 18:18:27 by ikhristi         ###   ########.fr       */
+/*   Created: 2023/09/15 14:35:23 by nikitos           #+#    #+#             */
+/*   Updated: 2023/09/15 14:36:07 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/include.h"
+#include "../inc/minishell.h"
 
 int	b_export(char **args)
 {

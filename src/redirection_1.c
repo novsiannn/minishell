@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirection_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:47:07 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/14 14:14:42 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/18 20:17:27 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int	redirection_loop(t_pipe_group **tmp, t_token_list **tok,
 			|| (*tok)->type == DOUBLE_QUOTES || (*tok)->type == WORD)
 		{
 			if (add_word(tmp, tok, first, count_words))
-				continue;
+				continue ;
 		}
 		else if ((*tok)->type == PIPE)
 		{

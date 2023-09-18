@@ -3,43 +3,53 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 14:32:33 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 14:34:25 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/18 20:25:20 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	check_keyword(char *args)
+int	check_var_name(char *var)
 {
-    int index;
-    int i;
+	int	i;
 
-    i = 0;
-    index = 0;
-    if (!args || args[0] || args[0] == '=')
-        return (1);
-    if (args[ft_strlen(args) - 1] != '=')
-        return (1);
-    while (args[i] && args[i] != '=')
-    {
-        if (ft_isalnum(args[i]))
-            index = 1;
-        else
-            if (ft_isdigit(args[i]) && !index)
-                return (1);
-        else if (args[i] != '_')
-			return (1);
+	i = 0;
+	while (var[i] && var[i] != '=')
+	{
+		if (!ft_isalnum(var[i]) && var[i] != '_')
+			return (0);
 		i++;
-    }
-    return (0);
+	}
+	return (1);
+}
+
+int	find_variable(char **envp, char *var, int var_size)
+{
+	int		i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (!ft_strncmp(envp[i], var, var_size))
+			if (envp[i] && envp[i][var_size] == '=')
+				return (i);
+		i++;
+	}
+	return (-1);
 }
 
 void	change_env(char *arg, int index)
 {
-	g_shell_h->envp[index] = ft_strdup(arg);
+	if (index > 0)
+	{
+		free(g_shell_h->envp[index]);
+		g_shell_h->envp[index] = ft_strdup(arg);
+	}
+	else
+		set_new(arg);
 }
 
 int	find_index_of_char(char *arg, char c)

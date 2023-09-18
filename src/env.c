@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:55:57 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/14 17:02:37 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/18 21:22:50 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,17 @@ void	init_vars_env(int	*counter, char ***env, char **envp, int *i)
 	*counter = 0;
 	*i = 0;
 	g_shell_h = malloc(sizeof(t_minishell));
-	*env = malloc(sizeof(char *) * 1000);
-	if (!env)
-		return ;
 	while (envp[*counter])
 		(*counter)++;
-	//Проверить для экспорта
+	*env = malloc(sizeof(char *) * 1000);
+	if (!(*env))
+		return ;
+	while (*i < 1000)
+	{
+		(*env)[*i] = NULL;
+		(*i)++;
+	}
+	*i = 0;
 }
 
 int	assign_env(char **envp)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:04:38 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 19:46:19 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/18 20:21:39 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,12 @@ int command_exit(char **arg)
 
 int	exec_builtin_parent(t_pipe_group *pipes)
 {
-	int err;
+	int	err;
 
 	if (ft_strcmp(pipes->argv[0], "unset") == 0)
 		err = b_unset(&pipes->argv[1]);
 	else if (ft_strcmp(pipes->argv[0], "export") == 0)
-		err = b_export(pipes->argv);
+		err = builtin_export(pipes->argv);
 	else if (ft_strcmp(pipes->argv[0], "cd") == 0)
 		err = command_cd(pipes->argv[1]);
 	else if (ft_strcmp(pipes->argv[0], "exit") == 0)

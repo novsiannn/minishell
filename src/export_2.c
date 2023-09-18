@@ -3,32 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   export_2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/15 14:35:23 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 14:36:07 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/18 21:14:59 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	b_export(char **args)
+int	builtin_export(char **argv)
 {
 	int	i;
+	int	index;
 
-	if (!args[1])
+	if (!argv[1])
 	{
 		print_export();
-		return (1);
+		return (0);
 	}
 	i = 0;
-	if (check_keyword(args[1]) || !args[2])
+	while (argv[++i])
 	{
-		ft_putstr_fd("minishell: export: `", 2);
-		ft_putstr_fd(args[i], 2);
-		ft_putstr_fd("': not a valid identifier\n", 2);
-		return (1);
+		if (!ft_strchr(argv[i], '='))
+			continue ;
+		else if (!check_var_name(argv[i]))
+			ft_putstr_fd("export: not valid in this context\n", 2);
+		index = find_path_env(g_shell_h->envp, argv[i]);
+		change_env(argv[i], index);
 	}
-	set_new(ft_strjoin(args[1], args[2]));
 	return (0);
 }

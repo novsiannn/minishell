@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 19:46:49 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/18 21:12:27 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,11 @@ void				print_export(void);
 
 int					throw_error(char *error);
 int					get_arr_len(char **arr);
-int					check_keyword(char *args);
 int					command_cd(char *arg);
 int					find_index_of_char(char *arg, char c);
 int					change_dir(char *arg);
 int					executor(t_pipe_group *data);
 int					get_type(char symbol);
-int					b_export(char **args);
 int					find_path_env(char **env, char *key);
 int					b_unset(char **args);
 int					create_red(t_token_list **token_tmp,
@@ -96,7 +94,7 @@ int					create_red(t_token_list **token_tmp,
 int					add_word(t_pipe_group **tmp, t_token_list **token_tmp,
 					int *first, int *count_words);
 int 				add_pipe(t_pipe_group **tmp, t_token_list **token_tmp,
-					int *first, int *count_words);										
+					int *first, int *count_words);
 int					assign_env(char **envp);
 int					get_words_minishell(char *str);
 int					ft_words_len(char *str);
@@ -152,6 +150,14 @@ void	expander(void);
 char	*resolve_dollar(char *inp);
 int		define_malloc(int *i, int *j, char *inp);
 char	*get_var_name(char *inp);
-void    signals(void);
+void	signals(void);
 void 	sig_handler(int sig);
+
+int		builtin_export(char **argv);
+int		check_var_name(char *var);
+int		find_variable(char **envp, char *var, int var_size);
+void	set_new(char *arg);
+void	change_env(char *arg, int index);
+int		find_index_of_char(char *arg, char c);
+void	print_export(void);
 #endif

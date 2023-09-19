@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/19 13:23:14 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/19 18:13:43 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_lexer(void)
 void	free_all(char *readed, char **splited)
 {
 	free_t_token(&(g_shell_h->head));
-	// free_t_pipe(&(g_shell_h->pipes));
+	free_t_pipe(&(g_shell_h->pipes));
 	free(readed);
 	free_splited(splited);
 }
@@ -70,6 +70,5 @@ int	main(int argc, char **argv, char **env)
 		executor(g_shell_h->pipes);
 		free_all(readed, splited);
 	}
-
 	return (0);
 }

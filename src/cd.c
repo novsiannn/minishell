@@ -6,7 +6,7 @@
 /*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:02:26 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 19:48:58 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:33:46 by novsiann         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ void	set_new(char *arg)
 	if (j != -1)
 	{
 		free(g_shell_h->envp[j]);
-		g_shell_h->envp[j] = arg;
+		g_shell_h->envp[j] = ft_strdup(arg);
 	}
 	else
-		g_shell_h->envp[(g_shell_h->current_env)++] = arg;
+		g_shell_h->envp[(g_shell_h->current_env)++] = ft_strdup(arg);
 	free(str);
 }
 

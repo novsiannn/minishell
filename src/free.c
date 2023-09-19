@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:43:43 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/15 19:45:29 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:14:42 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,9 @@ int	ft_arr_len(char **argv)
 void	free_argv(char **argv)
 {
 	int	i;
-	int	len;
 
 	i = 0;
-	len = ft_arr_len(argv);
-	while (i < len)
+	while (i < 50)
 	{
 		free(argv[i]);
 		i++;
@@ -93,6 +91,7 @@ void	free_t_pipe(t_pipe_group **token)
 	}
 	*token = NULL;
 }
+
 
 char	*ft_strjoin_allocate(int len1, int len2, char const *s1, char const *s2)
 {

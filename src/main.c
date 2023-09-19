@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/18 21:30:47 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/19 13:23:14 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	ft_lexer(void)
 void	free_all(char *readed, char **splited)
 {
 	free_t_token(&(g_shell_h->head));
-	free_t_pipe(&(g_shell_h->pipes));
+	// free_t_pipe(&(g_shell_h->pipes));
 	free(readed);
 	free_splited(splited);
 }
@@ -55,9 +55,14 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		readed = read_input();
-		// readed = "helo man | kak dela";
+		// readed = "export w=w";
 		if (!readed)
 			return (0);
+		if (ft_strcmp(readed, "env") == 0)
+		{
+			print_env();
+			continue ;
+		}
 		splited = ft_split_minishell(readed);
 		if (main_allocate(splited, readed) == 1)
 			continue;

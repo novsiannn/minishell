@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:04:38 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/20 13:57:52 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/20 13:58:56 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,12 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 	else if (prev && prev->output != -1)
 		in_fd = STDIN_FILENO;
 	x_p = get_working_path(data->cmd, g_shell_h->envp);
+	if (!x_p)
+	{
+		throw_error_exec("minishell: command not found\n");
+		return (STDIN_FILENO);
+	}
+	free(x_p);
 }
 
 int executor(t_pipe_group *data)

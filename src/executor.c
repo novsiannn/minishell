@@ -6,7 +6,7 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:04:38 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/19 12:54:45 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/20 13:57:52 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,13 +58,47 @@ int	exec_builtin_parent(t_pipe_group *pipes)
 	return (0);
 }
 
+char	*get_working_path(char *cmd, char **env)
+{
+	int		j;
+	char	*one_command_path;
+
+	if (!access(cmd, F_OK))
+		return (ft_strdup(cmd));
+	j = find_path_env(env, "PWD=");
+	if (j == -1)
+		return (NULL);
+	one_command_path = ft_strjoin(env[j], cmd);
+	if (!access(one_command_path, F_OK))
+		return (one_command_path);
+	free(one_command_path);
+	j = find_path_env(env, "PATH=");
+	if (j == -1)
+		return (NULL);
+}
+
+int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out_fd)
+{
+	char *x_p;
+
+	if (data->output != -1)
+		out_fd = data->output;
+	else if (g_shell_h->last == data->pipe_index)
+		out_fd = STDOUT_FILENO;
+	if (data->input != -1)
+		in_fd = data->input;
+	else if (prev && prev->output != -1)
+		in_fd = STDIN_FILENO;
+	x_p = get_working_path(data->cmd, g_shell_h->envp);
+}
+
 int executor(t_pipe_group *data)
 {
-	// int				pipe_fd;
-	// t_pipe_group	*prev;
+	int				pipe_fd;
+	t_pipe_group	*prev;
 
-	// pipe_fd = STDIN_FILENO;
-	// prev = NULL;
+	pipe_fd = STDIN_FILENO;
+	prev = NULL;
 	while (data)
 	{
 		if (g_shell_h->last == 0 && exec_builtin_parent(data) != -1)
@@ -72,7 +106,8 @@ int executor(t_pipe_group *data)
 			data = data->next;
 			continue ;
 		}
-		// prev = data;
+		pipe_fd = command_exec_prep(data, prev, pipe_fd, -1);
+		prev = data;
 		data = data->next;
 	}
 	return (1);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+         #
+#    By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/26 18:59:58 by nikitos           #+#    #+#              #
-#    Updated: 2023/09/18 20:20:24 by ikhristi         ###   ########.fr        #
+#    Updated: 2023/09/20 12:34:50 by nikitos          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ RED = \033[0;31m
 YELLOW = \033[1;33m
 INC = inc
 # -fsanitize=address -g -I $(INC)
-# CFLAGS = -Wall -Wextra -Werror -g
+#CFLAGS = -Wall -Wextra -Werror -g
 
 all:	$(NAME)
 

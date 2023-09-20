@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:02:26 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/19 19:33:46 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/20 12:08:22 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	command_cd(char *arg)
 	}
 	else
 		res = check_arg(arg);
-	return (0);
+	return (res);
 }
 
 int	change_dir(char *arg)

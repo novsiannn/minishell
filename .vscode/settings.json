@@ -20,5 +20,8 @@
 			"binaryPath": "/Users/nikitos/Desktop/42study/minishell_lastversion/minishell",
 			"binaryArgs": []
 		}
-	]
+	],
+	"files.associations": {
+		"minishell.h": "c"
+	}
 }

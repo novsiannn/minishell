@@ -6,39 +6,11 @@
 /*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:04:38 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/20 13:58:56 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/23 19:25:21 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
-
-int command_exit(char **arg)
-{
-	int len;
-	int	exit_status;
-
-	exit_status = 1;
-	len = get_arr_len(arg);
-	if (len > 2)
-	{
-		ft_putstr_fd("exit\nminishell: exit: too many arguments\n", 2);
-		return (1);
-	}
-	else if (len == 1)
-		exit_status = 0;
-	else if (arg[1])
-	{
-		if (!(ft_isdigit(arg[1][0])))
-		{
-			ft_putstr_fd("exit\nminishell: argument is not a numebr\n", 2);
-			return (1);
-		}
-		exit_status = ft_atoi(arg[1]);
-	}
-	free_shell_h();
-	exit(exit_status % 256);
-	return (0);
-}
 
 int	exec_builtin_parent(t_pipe_group *pipes)
 {
@@ -58,23 +30,26 @@ int	exec_builtin_parent(t_pipe_group *pipes)
 	return (0);
 }
 
-char	*get_working_path(char *cmd, char **env)
+int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 {
-	int		j;
-	char	*one_command_path;
+	int	pipe_fd[2]; // в pipe_fd[0] читаем . в pipe_fd[1] мы можем записывать и брать из него в другой процесс инфу
+	int	pid;//or
 
-	if (!access(cmd, F_OK))
-		return (ft_strdup(cmd));
-	j = find_path_env(env, "PWD=");
-	if (j == -1)
-		return (NULL);
-	one_command_path = ft_strjoin(env[j], cmd);
-	if (!access(one_command_path, F_OK))
-		return (one_command_path);
-	free(one_command_path);
-	j = find_path_env(env, "PATH=");
-	if (j == -1)
-		return (NULL);
+	pipe(pipe_fd); // создает канал который связывает stdin and stdout 
+	child_sig(); // ставит сигналы на дочерный процесс
+	pid = fork(); // fork создает два подпроцесса которые работают одновременно, родительский и дочерний. pid = -1 Это ошибка. 0 это значит что код выполняется в дочернем процессе. > 0 значит что код идет в родительском процессе
+	// if (pid == 0)
+	// 	child_process_prep(data, in_fd, out_fd, pipe_fd); Надо сделать эту функцию
+	waitpid(pid, &(g_shell_h->error), 0); // waitpid ждет завершение дочернего процесса и в g_shell_h->error запишется запишется информация о завершение процесса
+	signals(); // тут я думаю понятно
+	if ((g_shell_h->error) > 255)
+		(g_shell_h->error) /= 256; // чекаем на ошибку
+	close(pipe_fd[1]); // тут ясно
+	if (in_fd > 2) // с этими ебучими файл дискрипторами я до конца не разобрался но надо на примере смотреть
+		close(in_fd);
+	if (out_fd > 2)
+		close(out_fd);
+	return (pipe_fd[0]);
 }
 
 int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out_fd)
@@ -92,10 +67,11 @@ int	command_exec_prep(t_pipe_group *data, t_pipe_group *prev, int in_fd, int out
 	x_p = get_working_path(data->cmd, g_shell_h->envp);
 	if (!x_p)
 	{
-		throw_error_exec("minishell: command not found\n");
+		throw_error("minishell: command not found\n");
 		return (STDIN_FILENO);
 	}
 	free(x_p);
+	return (fork_and_execute(data, in_fd, out_fd));
 }
 
 int executor(t_pipe_group *data)
@@ -116,5 +92,7 @@ int executor(t_pipe_group *data)
 		prev = data;
 		data = data->next;
 	}
-	return (1);
+	if (pipe_fd > 2)
+		close(pipe_fd);
+	return (0);
 }

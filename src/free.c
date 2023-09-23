@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 20:43:43 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/19 19:29:38 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/23 16:21:31 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,20 @@ void	free_t_token(t_token_list **token)
 		tmp = next;
 	}
 	*token = NULL;
+}
+
+void	free_string_arr(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		free(str[i]);
+		i++;
+	}
+	if (str)
+		free(str);
 }
 
 int	ft_arr_len(char **argv)

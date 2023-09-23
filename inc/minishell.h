@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/18 21:12:27 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/23 19:05:04 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,8 +79,10 @@ void				charjoinfree(char **str, char ch);
 void				set_new(char *arg);
 void				free_shell_h(void);
 void				print_export(void);
+void				free_string_arr(char **str);
 
 int					throw_error(char *error);
+int					command_exit(char **arg);
 int					get_arr_len(char **arr);
 int					command_cd(char *arg);
 int					find_index_of_char(char *arg, char c);
@@ -127,6 +129,9 @@ void				ft_lstadd_back_minishell(t_token_list **lst, \
 t_token_list *new);
 void				get_final_type(t_token_list **token);
 char				*quotes_allocate(char *str);
+char				*get_working_path(char *cmd, char **env);
+char				*get_working_path_loop(char ***binary_paths, char **one_path,
+								char **one_command_path, char	*cmd);
 char				*cut_key(char **env, int index, char *key);
 char				*here_doc_init(char **file_name, t_token_list **token_tmp,
 						t_pipe_group **tmp, int *file);
@@ -138,6 +143,8 @@ void				heredoc_last(t_token_list **token_tmp,
 
 void				pipe_grp_mmry(t_pipe_group **pipe_grp, t_token_list *start, t_token_list *finish);
 void				parse(t_token_list *list);
+void				sig_handle_child(int sig);
+void				child_sig(void);
 
 void				lexer(char *input);
 

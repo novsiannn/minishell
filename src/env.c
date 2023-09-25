@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/09 11:55:57 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/18 21:22:50 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/25 14:44:10 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	assign_env(char **envp)
 	return (1);
 }
 
-void	print_env(void)
+int	print_env(void)
 {
 	int	i;
 
@@ -65,6 +65,7 @@ void	print_env(void)
 		}
 		i++;
 	}
+	return (0);
 }
 
 char	*find_in_env(char *str)

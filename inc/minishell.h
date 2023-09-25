@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:31:56 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/23 19:05:04 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/25 14:47:55 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ int					put_skip(t_token_list **tmp);
 int					ft_lstsize_n(t_token_list *start, t_token_list *finish);
 int					here_doc(t_token_list **token_tmp, t_pipe_group **tmp);
 int					open_output(t_pipe_group **tmp, t_token_list **token_tmp, int type);
+int					b_echo(char **args);
 
 int					main_allocate(char **splited, char *readed);
 void				ft_lexer(void);
@@ -113,9 +114,11 @@ void				put_type_tok(t_token_list **head);
 void				free_t_token(t_token_list **list);
 void				split_words(t_token_list **list);
 void				init_vars_env(int	*counter, char ***env, char **envp, int *i);
-void				print_env(void);
+int					print_env(void);
 void				fill_array(char **array, char *str);
 void				strjoin_free(char **str, char *add);
+void				throw_error_exec(char *error);
+void				echo_putstr_fd(char *arg, int fd);
 
 t_pipe_group		*redirection(void);
 void				ft_clear_tokens(t_token_list **tokens);
@@ -147,6 +150,8 @@ void				sig_handle_child(int sig);
 void				child_sig(void);
 
 void				lexer(char *input);
+
+int 				ft_pwd(void);
 
 t_pipe_group		*create_pipe_group(t_token_list *start, t_token_list *finish);
 t_pipe_group		*init_pipe(int index);

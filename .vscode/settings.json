@@ -19,6 +19,11 @@
 			"cwd": "/Users/nikitos/Desktop/42study/minishell_lastversion",
 			"binaryPath": "/Users/nikitos/Desktop/42study/minishell_lastversion/minishell",
 			"binaryArgs": []
+		},
+		{
+			"cwd": "/Users/ikhristi/core/minishell",
+			"binaryPath": "/Users/ikhristi/core/minishell/minishell",
+			"binaryArgs": []
 		}
 	],
 	"files.associations": {

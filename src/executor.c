@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   executor.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 15:04:38 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/25 14:48:56 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/26 10:40:51 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,11 +82,11 @@ int	fork_and_execute(t_pipe_group *data, int in_fd, int out_fd)
 	int	pipe_fd[2]; // в pipe_fd[0] читаем . в pipe_fd[1] мы можем записывать и брать из него в другой процесс инфу
 	int	pid;//or
 
-	pipe(pipe_fd); // создает канал который связывает stdin and stdout 
+	pipe(pipe_fd); // создает канал который связывает stdin and stdout
 	child_sig(); // ставит сигналы на дочерный процесс
 	pid = fork(); // fork создает два подпроцесса которые работают одновременно, родительский и дочерний. pid = -1 Это ошибка. 0 это значит что код выполняется в дочернем процессе. > 0 значит что код идет в родительском процессе
-	// if (pid == 0)
-	// 	child_process_prep(data, in_fd, out_fd, pipe_fd); Надо сделать эту функцию
+	if (pid == 0)
+		child_process_prep(data, in_fd, out_fd, pipe_fd); //Надо сделать эту функцию
 	waitpid(pid, &(g_shell_h->error), 0); // waitpid ждет завершение дочернего процесса и в g_shell_h->error запишется запишется информация о завершение процесса
 	signals(); // тут я думаю понятно
 	if ((g_shell_h->error) > 255)

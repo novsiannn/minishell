@@ -3,23 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/25 13:24:28 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/25 13:41:41 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/26 11:39:54 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-// int ft_pwd(void)
-// {
-//     char    *pwd;
-    
-//     pwd = find_in_env("PWD");
-//     printf("%s", pwd);
-//     return (1);
-// }
 int	ft_pwd(void)
 {
 	int		j;

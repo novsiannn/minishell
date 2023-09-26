@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/19 18:13:43 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/26 13:33:47 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,6 @@ int	main(int argc, char **argv, char **env)
 		// readed = "export w=w";
 		if (!readed)
 			return (0);
-		if (ft_strcmp(readed, "env") == 0)
-		{
-			print_env();
-			continue ;
-		}
 		splited = ft_split_minishell(readed);
 		if (main_allocate(splited, readed) == 1)
 			continue;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:48:42 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/06 19:24:53 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 11:48:49 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void	expander(void)
 			free(tmp->tok);
 			tmp->tok = buf;
 			buf = NULL;
-			//free(buf);
 		}
 		tmp = tmp->next;
 	}
@@ -47,12 +46,20 @@ char	*resolve_dollar(char *inp)
 		if (inp[i] == '$')
 		{
 			var_name = get_var_name(&inp[++i]);
-			var_value = find_in_env(var_name);
-			if (var_value)
-				ft_strlcat(&res[j], var_value, ft_strlen(var_value) + 1);
-			i += ft_strlen(var_name);
-			j += ft_strlen(var_value);
-			free(var_name);
+			if (*var_name == '\0')
+			{
+				ft_strlcat(&res[j], "$", 2);
+				j += 1;
+			}
+			else
+			{
+				var_value = find_in_env(var_name);
+				if (var_value)
+					ft_strlcat(&res[j], var_value, ft_strlen(var_value) + 1);
+				j += ft_strlen(var_value);
+			}
+				i += ft_strlen(var_name);
+				free(var_name);
 		}
 		else
 		{

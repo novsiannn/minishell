@@ -6,7 +6,7 @@
 /*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 19:11:47 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/26 13:33:47 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/26 18:12:34 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,11 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		readed = read_input();
-		// readed = "export w=w";
 		if (!readed)
 			return (0);
 		splited = ft_split_minishell(readed);
 		if (main_allocate(splited, readed) == 1)
-			continue;
+			continue ;
 		count_last(g_shell_h->pipes);
 		executor(g_shell_h->pipes);
 		free_all(readed, splited);

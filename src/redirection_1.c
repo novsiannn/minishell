@@ -6,7 +6,7 @@
 /*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:47:07 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/18 20:17:27 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:03:39 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	create_red(t_token_list **token_tmp,
 			&& (*token_tmp)->type != WORD))
 		return (throw_error(SYNTAX_ERROR));
 	if (type == HEREDOCK)
-		return here_doc(token_tmp, tmp);
+		return (here_doc(token_tmp, tmp));
 	if (type == LESS_THAN)
 	{
 		(*tmp)->input = open((*token_tmp)->tok, O_RDONLY);
@@ -59,7 +59,7 @@ int	add_word(t_pipe_group **tmp, t_token_list **token_tmp,
 	return (0);
 }
 
-int add_pipe(t_pipe_group **tmp, t_token_list **token_tmp,
+int	add_pipe(t_pipe_group **tmp, t_token_list **token_tmp,
 			int *first, int *count_words)
 {
 	if (!(*first))
@@ -112,7 +112,6 @@ t_pipe_group	*redirection(void)
 
 	i = 0;
 	count_words = 0;
-	// printf("YES");
 	g_shell_h->pipes = init_pipe(0);
 	tmp = g_shell_h->pipes;
 	token_tmp = g_shell_h->head;

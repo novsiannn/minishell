@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_3.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 21:44:01 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/09 16:55:55 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 18:11:31 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	charjoin_free(char **str, char letter)
 	*str = res;
 }
 
-void	find_tokens_loop(t_token_list **tmp, t_token_list **new, t_token_list **new_tok)
+void	find_tokens_loop(t_token_list **tmp, t_token_list **new, \
+						t_token_list **new_tok)
 {
 	int	i;
 

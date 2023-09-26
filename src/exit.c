@@ -3,18 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/23 16:09:40 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/23 16:09:49 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 17:53:14 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int command_exit(char **arg)
+int	command_exit(char **arg)
 {
-	int len;
+	int	len;
 	int	exit_status;
 
 	exit_status = 1;

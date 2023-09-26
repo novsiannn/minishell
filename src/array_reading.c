@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   array_reading.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 19:54:03 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/06 19:07:09 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 14:59:28 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ char	*words_allocate(char *str)
 	return (words);
 }
 
-void fill_array_end(char **array, char **str, int *word_index)
+void	fill_array_end(char **array, char **str, int *word_index)
 {
 	array[*word_index] = words_allocate(*str);
 	(*word_index)++;
 	while (**str != '\0' && **str != ' ' && **str != '\"' \
 		&& **str != '\t' && **str != '\n' && **str != '\'')
-			(*str)++;
+		(*str)++;
 }
 
 void	fill_array(char **array, char *str)

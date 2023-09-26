@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: novsiann <novsiann@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/08 14:34:13 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/15 19:44:36 by novsiann         ###   ########.fr       */
+/*   Updated: 2023/09/26 15:02:59 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,8 @@ void	skip_space(t_token_list **tmp)
 
 void	charjoinfree(char **str, char ch)
 {
-	char *adder;
-	char *new;
+	char	*adder;
+	char	*new;
 
 	adder = malloc(2);
 	adder[0] = ch;
@@ -53,7 +53,7 @@ void	charjoinfree(char **str, char ch)
 	new = ft_strjoin(*str, adder);
 	free (*str);
 	free (adder);
-	*str = new;	
+	*str = new;
 }
 
 int	get_arr_len(char **arr)
@@ -61,7 +61,7 @@ int	get_arr_len(char **arr)
 	int	i;
 
 	i = 0;
-	while(arr[i])
+	while (arr[i])
 		i++;
 	return (i);
 }

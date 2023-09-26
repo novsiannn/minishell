@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ikhristi <ikhristi@student.42wolfsburg.    +#+  +:+       +#+         #
+#    By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/26 18:59:58 by nikitos           #+#    #+#              #
-#    Updated: 2023/09/25 14:48:22 by ikhristi         ###   ########.fr        #
+#    Updated: 2023/09/26 18:19:49 by ikhristi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 LIBFT = libft
 
-SRCS = src/env.c src/main.c src/handler.c src/export.c src/path.c src/unset.c src/export_2.c src/exit.c src/signals.c src/free.c src/lexer_1.c src/lexer_2.c src/lexer_3.c src/array_reading.c src/clear.c src/read_input.c src/cd.c src/pipe_utils.c  src/executor.c src/redirection_1.c src/redirection_2.c src/heredoc.c src/lexer_utils.c src/token.c src/pars_utils.c src/pwd.c src/echo.c
+SRCS = src/env.c src/main.c src/handler.c src/export.c src/path.c src/unset.c src/export_2.c src/exit.c src/signals.c src/free.c src/free_2.c src/lexer_1.c src/lexer_2.c src/lexer_3.c src/lexer_4.c src/array_reading.c src/clear.c src/read_input.c src/cd.c src/pipe_utils.c  src/executor.c src/executor_2.c src/redirection_1.c src/redirection_2.c src/heredoc.c src/lexer_utils.c src/token.c src/pars_utils.c src/pwd.c src/echo.c
 OBJS = ${SRCS:.c=.o}
 
 RM = rm -f

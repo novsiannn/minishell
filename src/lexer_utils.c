@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/31 18:33:57 by novsiann          #+#    #+#             */
-/*   Updated: 2023/08/31 21:33:30 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 18:12:05 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,14 +52,13 @@ void	get_final_type(t_token_list **token)
 			tmp->type = EXPANSION;
 		else
 			tmp->type = WORD;
-	
 		tmp = tmp->next;
 	}
 }
 
 int	get_words_minishell(char *str)
 {
-	int n;
+	int	n;
 
 	n = 0;
 	while (*str == ' ' || *str == '\t' || *str == '\n')
@@ -70,7 +69,7 @@ int	get_words_minishell(char *str)
 		if (*str == '\'' || *str == '\"' || *str == ' ')
 		{
 			str++;
-			continue;
+			continue ;
 		}
 		while (*str != '\0' && *str != ' ' && *str != '\"' \
 		&& *str != '\t' && *str != '\n' && *str != '\'')

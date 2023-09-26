@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/14 18:02:26 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/20 12:08:22 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 15:06:11 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	set_new(char *arg)
 	free(str);
 }
 
-int  check_arg(char *str)
+int	check_arg(char *str)
 {
 	if (change_dir(str) == -1)
 	{
@@ -57,7 +57,7 @@ int	command_cd(char *arg)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 			return (1);
 		}
-		key = cut_key(g_shell_h->envp, i , "HOME");
+		key = cut_key(g_shell_h->envp, i, "HOME");
 		if (change_dir(key) == -1)
 			ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		free(key);
@@ -80,7 +80,7 @@ int	change_dir(char *arg)
 		free(current);
 		return (-1);
 	}
-	tmp = getcwd(0,256);
+	tmp = getcwd(0, 256);
 	str1 = ft_strjoin("OLDPWD=", current);
 	str2 = ft_strjoin("PWD=", tmp);
 	set_new(str1);
@@ -96,5 +96,5 @@ char	*cut_key(char **env, int index, char *key)
 
 	buf = ft_substr(env[index], ft_strlen(key) + 1,
 			(ft_strlen(env[index]) - 1 - ft_strlen(key)));
-	return (buf); 
+	return (buf);
 }

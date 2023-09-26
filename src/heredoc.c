@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:00:52 by nikitos           #+#    #+#             */
-/*   Updated: 2023/09/09 16:02:36 by nikitos          ###   ########.fr       */
+/*   Updated: 2023/09/26 18:10:32 by ikhristi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ int	here_doc(t_token_list **token_tmp, t_pipe_group **tmp)
 			return (1);
 		}
 		if (!ft_strcmp(limit, buf))
-			break;
-		charjoinfree(&buf,'\n');
+			break ;
+		charjoinfree(&buf, '\n');
 		write(file, buf, ft_strlen(buf));
 		free(buf);
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ikhristi <ikhristi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nikitos <nikitos@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 17:48:42 by ikhristi          #+#    #+#             */
-/*   Updated: 2023/09/26 19:23:25 by ikhristi         ###   ########.fr       */
+/*   Updated: 2023/09/26 19:34:30 by nikitos          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	expander(void)
 	}
 }
 
-// void	if_empty_var_name(int *j, char **res)
-// {
-// 	ft_strlcat(res[*j], "$", 2);
-// 	*j += 1;
-// }
+void	if_empty_var_name(int *j, char **res)
+{
+	ft_strlcat(res[*j], "$", 2);
+	*j += 1;
+}
 
 // void	not_empty_var_name(char **var_name, char **res, int *j)
 // {
